@@ -195,6 +195,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/04/01/e6-98-be-e7-a4-bamysql-e6-9f-a5-e8-af-a2-e8-bf-9b-e7-a8-8b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/04/01/e6-98-be-e7-a4-bamysql-e6-9f-a5-e8-af-a2-e8-bf-9b-e7-a8-8b/" class="post-title-link" itemprop="url">linux下导入、导出mysql数据库命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-04-01 10:01:32" itemprop="dateCreated datePublished" datetime="2015-04-01T10:01:32+08:00">2015-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）"><a href="#导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）" class="headerlink" title="导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）"></a>导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）</h2><h3 id="导出数据和表结构"><a href="#导出数据和表结构" class="headerlink" title="导出数据和表结构"></a>导出数据和表结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 数据库名 &gt; 数据库名.sql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F; mysqldump -uroot -p abc &gt; abc.sql</span><br></pre></td></tr></table></figure>
+<p>敲回车后会提示输入密码</p>
+<h3 id="只导出表结构"><a href="#只导出表结构" class="headerlink" title="只导出表结构"></a>只导出表结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 -d 数据库名 &gt; 数据库名.sql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F; mysqldump -uroot -p -d abc &gt; abc.sql</span><br></pre></td></tr></table></figure>
+
+<p>注：<code>/usr/local/mysql/bin/</code> —&gt; mysql的data目录</p>
+<p>在执行mysql命令的过程中，有时候会碰到如下的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; mysqldump -uroot -p123456 -d jact &gt; jact.sql</span><br><span class="line">mysqldump: Got error: 2002: Can&#39;t connect to local MySQL server through socket &#39;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;var&#x2F;mysql.sock&#39; (2) when trying to connect</span><br></pre></td></tr></table></figure>
+
+<p>说明我们使用的连接mysql的unix套接字错误。</p>
+<p>要找出套接字的地点，应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; netstat -ln | grep mysql</span><br><span class="line">unix  2      [ ACC ]     STREAM     LISTENING     7414  &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock</span><br></pre></td></tr></table></figure>
+
+<p>然后敲入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell&gt; mysqldump --socket&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock -uroot -p123456 -d jact &gt; jact.sql</span><br></pre></td></tr></table></figure>
+
+<p>乱码问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p --default-character-set&#x3D;utf8 dbname tablename &gt; bak.sql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p --default-character-set&#x3D;utf8 dbname &lt; bak.sql</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h2><h3 id="首先建空数据库"><a href="#首先建空数据库" class="headerlink" title="首先建空数据库"></a>首先建空数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;create database abc;</span><br></pre></td></tr></table></figure>
+
+<h3 id="导入数据库-1"><a href="#导入数据库-1" class="headerlink" title="导入数据库"></a>导入数据库</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>（1）选择数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use abc;</span><br></pre></td></tr></table></figure>
+
+<p>（2）设置数据库编码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;set names utf8;</span><br></pre></td></tr></table></figure>
+
+<p>（3）导入数据（注意sql文件的路径）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;source &#x2F;home&#x2F;abc&#x2F;abc.sql;</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u用户名 -p密码 数据库名 &lt; 数据库名.sql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uabc_f -p abc &lt; abc.sql</span><br></pre></td></tr></table></figure>
+
+<p>建议使用第二种方法导入。</p>
+<p>注意：有命令行模式，有sql命令</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/04/01/mysql-select-into-from/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1262,7 +1380,7 @@ var e=event.srcElement||event.target;
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

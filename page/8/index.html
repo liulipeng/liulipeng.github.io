@@ -195,6 +195,232 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/js-e6-b7-bb-e5-8a-a0-e5-88-a0-e9-99-a4-e5-85-83-e7-b4-a0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/05/14/js-e6-b7-bb-e5-8a-a0-e5-88-a0-e9-99-a4-e5-85-83-e7-b4-a0/" class="post-title-link" itemprop="url">JS添加删除元素</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-05-14 10:07:07" itemprop="dateCreated datePublished" datetime="2015-05-14T10:07:07+08:00">2015-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>&nbsp;</p>
+<pre class="prettyprint lang-html linenums">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;JS添加删除元素&lt;/title&gt;
+&lt;script type="text/javascript"&gt;
+
+    function $(nodeId)
+    {
+        return document.getElementById(nodeId);
+    }
+    function $Name(tagName)
+    {
+        return document.getElementsByTagName(tagName);
+    }
+
+    function replaceMsg()
+    {
+        var newNode = document.createElement("P");//创建一个P标签
+        newNode.innerHTML = "&lt;font color='red'&gt;替换后的文字&lt;/font&gt;";
+        var oldNode = $Name("P")[0];//获取body里面第一个p元素
+        oldNode.parentNode.replaceChild(newNode,oldNode);//直接替换了标签
+    }
+
+    function removeMsg()
+    {
+        var node = $("p2");//p标签
+        var nodeBtn = $("remove");//按钮
+        //node.parentNode.removeChild(node); //下面效果相同
+        document.body.removeChild(node);//在body中删除id为P2的元素
+        //nodeBtn.parentNode.removeChild(nodeBtn);//删除该按钮
+        document.body.removeChild(nodeBtn);
+        //document.body.removeNode();执行这条语句将清空body里面的任何元素
+    }
+
+    function addbefore()
+    {
+        var newNode = document.createElement("p");//创建P标签
+        //var newText = document.createTextNode("前面添加的元素");
+        //newNode.appendChild(newText);//与下面效果一样
+        newNode.innerHTML = "&lt;font color='red'&gt;前面添加的元素&lt;/font&gt;";//书写P标签里面的内容
+        var oldNode = $("p3");//目标标签
+        //document.body.insertBefore(newNode,oldNode);
+        oldNode.parentNode.insertBefore(newNode,oldNode);//在目标标签前面添加元素
+    }
+
+    function addlast()
+    {
+        var newNode = document.createElement("p");//创建P标签
+        //var newText = document.createTextNode("后面添加的元素");
+        //newNode.appendChild(newText);//与下面效果一样
+        newNode.innerHTML = "&lt;font color='red'&gt;后面添加的元素&lt;/font&gt;";
+        var oldNode = $("p3");
+
+        oldNode.appendChild(newNode);
+        //document.body.appendChild(newNode);//如果使用该方法,则在body的最后添加元素
+    }
+
+    window.onload = function addArrayMsg()
+    {
+        var arrayMsg = ['one','two','three','four','five'];//创建数组
+        var fragment = document.createDocumentFragment();//创建文档片段
+        var newNode ;
+        for (var i=0 ;i&lt;arrayMsg.length ;i++ )
+        {
+            newNode = document.createElement("P");//创建P标签
+            var nodeText = document.createTextNode(arrayMsg[i]);//创建文本标签,value为数组里面的值
+            newNode.appendChild(nodeText);//
+            fragment.appendChild(newNode);//把P标签追加到fragment里面
+        }
+        document.body.appendChild(fragment);//把fragment追加到body里面
+    }  
+
+    function addRow()
+    {
+        var tab = $("myTable");
+        //tab.createCaption().innerHTML="&lt;font color='red'&gt;我的表格&lt;/font&gt;";
+        var oldTr = $("handleTr");
+        var newTr = tab.insertRow();//创建一行
+        var newTd1 = newTr.insertCell();//创建一个单元格
+        var newTd2 = newTr.insertCell();//创建一个单元格
+        newTd1.innerHTML = "&lt;input type='checkbox' /&gt;";
+        newTd2.innerHTML = "&lt;input type='text' /&gt;";
+
+    }
+
+    function removeRow()
+    {
+        var tab = $("myTable");
+//        if(tab.rows.length&gt;0){
+//            tab.deleteRow();
+//            if(tab.rows.length==1)
+//                tab.deleteCaption();
+//        }
+
+        var cbbox ;
+        for(var i=0;i&lt;tab.rows.length;i++){
+            cbbox = tab.rows[i].childNodes[0].childNodes[0];//获取input元素
+            if(cbbox.checked){
+
+                tab.deleteRow(i--);
+            }
+        }
+    }
+
+    //全选
+    function selAll(value){
+        var items = document.all.tags("input");//获取页面上所有的input元素
+        for(var i = 0;i&lt;items.length;i++){
+            if(items[i].type=="checkbox"){//判断类型是否为checkbox
+                items[i].checked = value.checked;
+            }
+        }
+    }
+
+    function getInputValue()
+    {
+        var inputArray = new Array();//创建一个数组
+        var tab = $("myTable");
+        var tbInput;
+        for(var i=0;i&lt;tab.rows.length;i++){
+           tbInput = tab.rows[i].childNodes[1].childNodes[0].value;
+           if(tbInput!=""&amp;&amp;tbInput!=null)
+               inputArray.push(tbInput);
+        }
+        inputArray = inputArray.join("*^&amp;");//默认以","号连接
+        $("showValue").value = inputArray;
+    }
+    var x ='10+20';
+("alert(x);")
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p id="p1"&gt;Hello World!&lt;/p&gt;&lt;input type="button" value="替换内容" onClick="replaceMsg();" /&gt;
+&lt;p id="p2"&gt;我可以被删除!&lt;/p&gt;&lt;input type="button" id="remove" value="删除它" onClick="removeMsg();" /&gt;
+&lt;p id="p3"&gt;在我上下添加一个元素吧！&lt;/p&gt;&lt;input type="button" id="addbefore" value="前面添加" onClick="addbefore();" /&gt;
+&lt;input type="button" id="addlast" value="后面添加" onClick="addlast();" /&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;div style="border:1px solid blue;height:300px"&gt;
+    &lt;table id="myTable" cellpadding="0" cellspacing="0" border="1px solid blue" style="padding:4px;"&gt;
+
+    &lt;/table&gt;
+    &lt;input type="checkbox" onClick="selAll(this);" /&gt;
+    &lt;input type="button" value="添加一行" id="addRow" onClick="addRow();" /&gt;
+    &lt;input type="button" value="删除一行" id="removeRow" onClick="removeRow();" /&gt;&lt;br&gt;
+    &lt;textarea rows="5" cols="25" id="showValue" /&gt;&lt;/textarea&gt;
+    &lt;input type="button" id="getInputValue" onClick="getInputValue();" value="取值 " /&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<pre class="prettyprint lang-js linenums"></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/php-array-walk-e5-92-8c-foreach-for-e7-9a-84-e6-95-88-e7-8e-87-e7-9a-84-e6-af-94-e8-be-83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,85 +1406,6 @@ function CreateFolder($dir, $mode = 0777){
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/php-e5-88-a4-e6-96-ad-e5-ad-97-e7-ac-a6-e7-bc-96-e7-a0-81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/05/14/php-e5-88-a4-e6-96-ad-e5-ad-97-e7-ac-a6-e7-bc-96-e7-a0-81/" class="post-title-link" itemprop="url">PHP 判断字符编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-05-14 09:58:58" itemprop="dateCreated datePublished" datetime="2015-05-14T09:58:58+08:00">2015-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <pre class="prettyprint lang-php linenums">function is_utf8($liehuo_net){
-    if (preg_match("/^([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}$/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){2,}/",$liehuo_net) == true){
-        return true;
-    }else{
-        return false;
-    }
-}</pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1328,7 +1475,7 @@ function CreateFolder($dir, $mode = 0777){
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

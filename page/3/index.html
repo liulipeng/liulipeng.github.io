@@ -195,6 +195,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/06/mysql-lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/06/06/mysql-lock/" class="post-title-link" itemprop="url">mysql的锁表于解锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-06-06 11:47:23" itemprop="dateCreated datePublished" datetime="2016-06-06T11:47:23+08:00">2016-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>锁表</p>
+<p>将mysql的数据库锁表，仅仅允许读，以保证数据的一致性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush tables with read lock;   </span><br></pre></td></tr></table></figure>
+
+<p>解锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; unlock tables;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/02/yii-validators-validator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1300,190 +1378,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Mysql 用户管理和权限设置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-05-23 19:17:17" itemprop="dateCreated datePublished" datetime="2016-05-23T19:17:17+08:00">2016-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a><strong>用户管理</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use mysql;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a><strong>查看</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,user,password from user;</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create user zx_root IDENTIFIED by &#39;xxxxx&#39;;   &#x2F;&#x2F;identified by 会将纯文本密码加密作为散列值存储</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;rename user feng to newuser; &#x2F;&#x2F;mysql 5之后可以使用，之前需要使用update 更新user表</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;drop user newuser;</span><br></pre></td></tr></table></figure>
-<p>//mysql5之前删除用户时必须先使用revoke 删除用户权限，然后删除用户，mysql5之后drop 命令可以删除用户的同时删除用户的相关权限</p>
-<h2 id="更改密码"><a href="#更改密码" class="headerlink" title="更改密码"></a>更改密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">mysql&gt; update mysql.user set password&#x3D;password(&#39;xxxx&#39;) where user&#x3D;&#39;otheruser&#39;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看用户权限"><a href="#查看用户权限" class="headerlink" title="查看用户权限"></a>查看用户权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show grants for zx_root;</span><br></pre></td></tr></table></figure>
-
-<h2 id="赋予权限"><a href="#赋予权限" class="headerlink" title="赋予权限"></a>赋予权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select on dmc_db.*  to zx_root;</span><br></pre></td></tr></table></figure>
-
-<h2 id="回收权限"><a href="#回收权限" class="headerlink" title="回收权限"></a>回收权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; revoke select on dmc_db.* from  zx_root;  &#x2F;&#x2F;如果权限不存在会报错</span><br></pre></td></tr></table></figure>
-
-<p>上面的命令也可使用多个权限同时赋予和回收，权限之间使用逗号分隔</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select, update, delete, insert on dmc_db.* to  zx_root;</span><br></pre></td></tr></table></figure>
-
-<p>如果想立即看到结果使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<p>命令更新 </p>
-<h2 id="设置权限时必须给出一下信息"><a href="#设置权限时必须给出一下信息" class="headerlink" title="设置权限时必须给出一下信息"></a><strong>设置权限时必须给出一下信息</strong></h2><ol>
-<li>要授予的权限</li>
-<li>被授予访问权限的数据库或表</li>
-<li>用户名</li>
-</ol>
-<h2 id="grant和revoke可以在几个层次上控制访问权限"><a href="#grant和revoke可以在几个层次上控制访问权限" class="headerlink" title="grant和revoke可以在几个层次上控制访问权限"></a><strong>grant和revoke可以在几个层次上控制访问权限</strong></h2><ol>
-<li>整个服务器，使用 grant ALL  和revoke  ALL</li>
-<li>整个数据库，使用on  database.*</li>
-<li>特点表，使用on  database.table</li>
-<li>特定的列</li>
-<li>特定的存储过程</li>
-</ol>
-<h2 id="user表中host列的值的意义"><a href="#user表中host列的值的意义" class="headerlink" title="user表中host列的值的意义"></a><strong>user表中host列的值的意义</strong></h2><table>
-<thead>
-<tr>
-<th>Host</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%</td>
-<td>匹配所有主机</td>
-</tr>
-<tr>
-<td>localhost</td>
-<td>localhost不会被解析成IP地址，直接通过UNIXsocket连接</td>
-</tr>
-<tr>
-<td>127.0.0.1</td>
-<td>会通过TCP/IP协议连接，并且只能在本机访问;</td>
-</tr>
-<tr>
-<td>::1</td>
-<td>::1就是兼容支持ipv6的，表示同ipv4的127.0.0.1</td>
-</tr>
-</tbody></table>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。"><a href="#grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。" class="headerlink" title="grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。"></a>grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant insert on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant update on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
-
-<p>或者，用一条 MySQL 命令来替代：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
-</blockquote>
-<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant alter on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant drop on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-操作-MySQL-外键权限。"><a href="#grant-操作-MySQL-外键权限。" class="headerlink" title="grant 操作 MySQL 外键权限。"></a>grant 操作 MySQL 外键权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant references on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-操作-MySQL-临时表权限。"><a href="#grant-操作-MySQL-临时表权限。" class="headerlink" title="grant 操作 MySQL 临时表权限。"></a>grant 操作 MySQL 临时表权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant create temporary tables on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-操作-MySQL-索引权限。"><a href="#grant-操作-MySQL-索引权限。" class="headerlink" title="grant 操作 MySQL 索引权限。"></a>grant 操作 MySQL 索引权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant index on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-操作-MySQL-视图、查看视图源代码-权限。"><a href="#grant-操作-MySQL-视图、查看视图源代码-权限。" class="headerlink" title="grant 操作 MySQL 视图、查看视图源代码 权限。"></a>grant 操作 MySQL 视图、查看视图源代码 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant create view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant show view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-操作-MySQL-存储过程、函数-权限。"><a href="#grant-操作-MySQL-存储过程、函数-权限。" class="headerlink" title="grant 操作 MySQL 存储过程、函数 权限。"></a>grant 操作 MySQL 存储过程、函数 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, can show procedure status</span><br><span class="line">grant alter routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, you can drop a procedure</span><br><span class="line">grant execute on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="grant-普通-DBA-管理某个-MySQL-数据库的权限。"><a href="#grant-普通-DBA-管理某个-MySQL-数据库的权限。" class="headerlink" title="grant 普通 DBA 管理某个 MySQL 数据库的权限。"></a>grant 普通 DBA 管理某个 MySQL 数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on testdb to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
-
-<p>其中，关键字 “privileges” 可以省略。</p>
-<h3 id="grant-高级-DBA-管理-MySQL-中所有数据库的权限。"><a href="#grant-高级-DBA-管理-MySQL-中所有数据库的权限。" class="headerlink" title="grant 高级 DBA 管理 MySQL 中所有数据库的权限。"></a>grant 高级 DBA 管理 MySQL 中所有数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all on *.* to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
-
-<h3 id="MySQL-grant-权限，分别可以作用在多个层次上。"><a href="#MySQL-grant-权限，分别可以作用在多个层次上。" class="headerlink" title="MySQL grant 权限，分别可以作用在多个层次上。"></a>MySQL grant 权限，分别可以作用在多个层次上。</h3><h4 id="grant-作用在整个-MySQL-服务器上"><a href="#grant-作用在整个-MySQL-服务器上" class="headerlink" title="grant 作用在整个 MySQL 服务器上"></a>grant 作用在整个 MySQL 服务器上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant select on *.* to dba@localhost; -- dba 可以查询 MySQL 中所有数据库中的表。</span><br><span class="line">grant all on *.* to dba@localhost; -- dba 可以管理 MySQL 中的所有数据库</span><br></pre></td></tr></table></figure>
-
-<h4 id="grant-作用在单个数据库上"><a href="#grant-作用在单个数据库上" class="headerlink" title="grant 作用在单个数据库上"></a>grant 作用在单个数据库上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to dba@localhost; -- dba 可以查询 testdb 中的表。</span><br></pre></td></tr></table></figure>
-
-<h4 id="grant-作用在单个数据表上"><a href="#grant-作用在单个数据表上" class="headerlink" title="grant 作用在单个数据表上"></a>grant 作用在单个数据表上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.orders to dba@localhost;</span><br></pre></td></tr></table></figure>
-
-<h4 id="grant-作用在表中的列上"><a href="#grant-作用在表中的列上" class="headerlink" title="grant 作用在表中的列上"></a>grant 作用在表中的列上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select(id, se, rank) on testdb.apache_log to dba@localhost;</span><br></pre></td></tr></table></figure>
-
-<h4 id="grant-作用在存储过程、函数上"><a href="#grant-作用在存储过程、函数上" class="headerlink" title="grant 作用在存储过程、函数上"></a>grant 作用在存储过程、函数上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant execute on procedure testdb.pr_add to &#39;dba&#39;@&#39;localhost&#39;</span><br><span class="line">grant execute on function testdb.fn_add to &#39;dba&#39;@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
-
-<h4 id="GRANT命令使用说明"><a href="#GRANT命令使用说明" class="headerlink" title="GRANT命令使用说明"></a>GRANT命令使用说明</h4><p>先来看一个例子，创建一个只允许从本地登录的超级用户feihong，并允许将权限赋予别的用户，密码为<a href="mailto:&#116;&#101;&#x73;&#116;&#x40;&#x66;&#101;&#105;&#x68;&#111;&#110;&#x67;&#x2e;&#49;&#49;&#x31;">&#116;&#101;&#x73;&#116;&#x40;&#x66;&#101;&#105;&#x68;&#111;&#110;&#x67;&#x2e;&#49;&#49;&#x31;</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO feihong@&#39;localhost&#39; IDENTIFIED BY &#39;test@feihong.111&#39; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
-
-<p>GRANT命令说明：</p>
-<ul>
-<li><code>ALL PRIVILEGES</code> 是表示所有权限，你也可以使用select、update等权限提到的权限。</li>
-<li><code>ON </code> 用来指定权限针对哪些库和表。</li>
-<li><code>*.*</code> 中前面的*号用来指定数据库名，后面的*号用来指定表名。</li>
-<li><code>TO</code> 表示将权限赋予某个用户。</li>
-<li><code>feihong@&#39;localhost&#39;</code> 表示feihong用户，@后面接限制的主机，可以是IP、IP段、域名以及%，%表示任何地方。注意：这里%有的版本不包括本地，以前碰到过给某个用户设置了%允许任何地方登录，但是在本地登录不了，这个和版本有关系，遇到这个问题再加一个localhost的用户就可以了。</li>
-<li><code>IDENTIFIED BY</code> 指定用户的登录密码。</li>
-<li><code>WITH GRANT OPTION</code> 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定WITH GRANT OPTION选项导致后来该用户不能使用GRANT命令创建用户或者给其他用户授权。</li>
-</ul>
-<p>备注：可以使用GRANT重复给用户添加权限，权限叠加，比如你先给用户添加了一个select权限，然后又给用户添加了一个insert权限，那么该用户就同时拥有了select和insert权限。</p>
-<p>注意：修改完权限以后 一定要刷新服务，或者重启服务，刷新服务用：<code>FLUSH PRIVILEGES</code>。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1553,7 +1447,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -195,6 +195,190 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Mysql 用户管理和权限设置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-23 19:17:17" itemprop="dateCreated datePublished" datetime="2016-05-23T19:17:17+08:00">2016-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a><strong>用户管理</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use mysql;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a><strong>查看</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,user,password from user;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create user zx_root IDENTIFIED by &#39;xxxxx&#39;;   &#x2F;&#x2F;identified by 会将纯文本密码加密作为散列值存储</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;rename user feng to newuser; &#x2F;&#x2F;mysql 5之后可以使用，之前需要使用update 更新user表</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;drop user newuser;</span><br></pre></td></tr></table></figure>
+<p>//mysql5之前删除用户时必须先使用revoke 删除用户权限，然后删除用户，mysql5之后drop 命令可以删除用户的同时删除用户的相关权限</p>
+<h2 id="更改密码"><a href="#更改密码" class="headerlink" title="更改密码"></a>更改密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">mysql&gt; update mysql.user set password&#x3D;password(&#39;xxxx&#39;) where user&#x3D;&#39;otheruser&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看用户权限"><a href="#查看用户权限" class="headerlink" title="查看用户权限"></a>查看用户权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show grants for zx_root;</span><br></pre></td></tr></table></figure>
+
+<h2 id="赋予权限"><a href="#赋予权限" class="headerlink" title="赋予权限"></a>赋予权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select on dmc_db.*  to zx_root;</span><br></pre></td></tr></table></figure>
+
+<h2 id="回收权限"><a href="#回收权限" class="headerlink" title="回收权限"></a>回收权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; revoke select on dmc_db.* from  zx_root;  &#x2F;&#x2F;如果权限不存在会报错</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令也可使用多个权限同时赋予和回收，权限之间使用逗号分隔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select, update, delete, insert on dmc_db.* to  zx_root;</span><br></pre></td></tr></table></figure>
+
+<p>如果想立即看到结果使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>命令更新 </p>
+<h2 id="设置权限时必须给出一下信息"><a href="#设置权限时必须给出一下信息" class="headerlink" title="设置权限时必须给出一下信息"></a><strong>设置权限时必须给出一下信息</strong></h2><ol>
+<li>要授予的权限</li>
+<li>被授予访问权限的数据库或表</li>
+<li>用户名</li>
+</ol>
+<h2 id="grant和revoke可以在几个层次上控制访问权限"><a href="#grant和revoke可以在几个层次上控制访问权限" class="headerlink" title="grant和revoke可以在几个层次上控制访问权限"></a><strong>grant和revoke可以在几个层次上控制访问权限</strong></h2><ol>
+<li>整个服务器，使用 grant ALL  和revoke  ALL</li>
+<li>整个数据库，使用on  database.*</li>
+<li>特点表，使用on  database.table</li>
+<li>特定的列</li>
+<li>特定的存储过程</li>
+</ol>
+<h2 id="user表中host列的值的意义"><a href="#user表中host列的值的意义" class="headerlink" title="user表中host列的值的意义"></a><strong>user表中host列的值的意义</strong></h2><table>
+<thead>
+<tr>
+<th>Host</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>匹配所有主机</td>
+</tr>
+<tr>
+<td>localhost</td>
+<td>localhost不会被解析成IP地址，直接通过UNIXsocket连接</td>
+</tr>
+<tr>
+<td>127.0.0.1</td>
+<td>会通过TCP/IP协议连接，并且只能在本机访问;</td>
+</tr>
+<tr>
+<td>::1</td>
+<td>::1就是兼容支持ipv6的，表示同ipv4的127.0.0.1</td>
+</tr>
+</tbody></table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。"><a href="#grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。" class="headerlink" title="grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。"></a>grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant insert on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant update on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>或者，用一条 MySQL 命令来替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
+</blockquote>
+<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant alter on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant drop on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-外键权限。"><a href="#grant-操作-MySQL-外键权限。" class="headerlink" title="grant 操作 MySQL 外键权限。"></a>grant 操作 MySQL 外键权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant references on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-临时表权限。"><a href="#grant-操作-MySQL-临时表权限。" class="headerlink" title="grant 操作 MySQL 临时表权限。"></a>grant 操作 MySQL 临时表权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant create temporary tables on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-索引权限。"><a href="#grant-操作-MySQL-索引权限。" class="headerlink" title="grant 操作 MySQL 索引权限。"></a>grant 操作 MySQL 索引权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant index on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-视图、查看视图源代码-权限。"><a href="#grant-操作-MySQL-视图、查看视图源代码-权限。" class="headerlink" title="grant 操作 MySQL 视图、查看视图源代码 权限。"></a>grant 操作 MySQL 视图、查看视图源代码 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant create view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant show view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-存储过程、函数-权限。"><a href="#grant-操作-MySQL-存储过程、函数-权限。" class="headerlink" title="grant 操作 MySQL 存储过程、函数 权限。"></a>grant 操作 MySQL 存储过程、函数 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, can show procedure status</span><br><span class="line">grant alter routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, you can drop a procedure</span><br><span class="line">grant execute on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-普通-DBA-管理某个-MySQL-数据库的权限。"><a href="#grant-普通-DBA-管理某个-MySQL-数据库的权限。" class="headerlink" title="grant 普通 DBA 管理某个 MySQL 数据库的权限。"></a>grant 普通 DBA 管理某个 MySQL 数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on testdb to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<p>其中，关键字 “privileges” 可以省略。</p>
+<h3 id="grant-高级-DBA-管理-MySQL-中所有数据库的权限。"><a href="#grant-高级-DBA-管理-MySQL-中所有数据库的权限。" class="headerlink" title="grant 高级 DBA 管理 MySQL 中所有数据库的权限。"></a>grant 高级 DBA 管理 MySQL 中所有数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all on *.* to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-grant-权限，分别可以作用在多个层次上。"><a href="#MySQL-grant-权限，分别可以作用在多个层次上。" class="headerlink" title="MySQL grant 权限，分别可以作用在多个层次上。"></a>MySQL grant 权限，分别可以作用在多个层次上。</h3><h4 id="grant-作用在整个-MySQL-服务器上"><a href="#grant-作用在整个-MySQL-服务器上" class="headerlink" title="grant 作用在整个 MySQL 服务器上"></a>grant 作用在整个 MySQL 服务器上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant select on *.* to dba@localhost; -- dba 可以查询 MySQL 中所有数据库中的表。</span><br><span class="line">grant all on *.* to dba@localhost; -- dba 可以管理 MySQL 中的所有数据库</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在单个数据库上"><a href="#grant-作用在单个数据库上" class="headerlink" title="grant 作用在单个数据库上"></a>grant 作用在单个数据库上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to dba@localhost; -- dba 可以查询 testdb 中的表。</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在单个数据表上"><a href="#grant-作用在单个数据表上" class="headerlink" title="grant 作用在单个数据表上"></a>grant 作用在单个数据表上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.orders to dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在表中的列上"><a href="#grant-作用在表中的列上" class="headerlink" title="grant 作用在表中的列上"></a>grant 作用在表中的列上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select(id, se, rank) on testdb.apache_log to dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在存储过程、函数上"><a href="#grant-作用在存储过程、函数上" class="headerlink" title="grant 作用在存储过程、函数上"></a>grant 作用在存储过程、函数上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant execute on procedure testdb.pr_add to &#39;dba&#39;@&#39;localhost&#39;</span><br><span class="line">grant execute on function testdb.fn_add to &#39;dba&#39;@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<h4 id="GRANT命令使用说明"><a href="#GRANT命令使用说明" class="headerlink" title="GRANT命令使用说明"></a>GRANT命令使用说明</h4><p>先来看一个例子，创建一个只允许从本地登录的超级用户feihong，并允许将权限赋予别的用户，密码为<a href="mailto:&#116;&#101;&#x73;&#116;&#x40;&#x66;&#101;&#105;&#x68;&#111;&#110;&#x67;&#x2e;&#49;&#49;&#x31;">&#116;&#101;&#x73;&#116;&#x40;&#x66;&#101;&#105;&#x68;&#111;&#110;&#x67;&#x2e;&#49;&#49;&#x31;</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO feihong@&#39;localhost&#39; IDENTIFIED BY &#39;test@feihong.111&#39; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<p>GRANT命令说明：</p>
+<ul>
+<li><code>ALL PRIVILEGES</code> 是表示所有权限，你也可以使用select、update等权限提到的权限。</li>
+<li><code>ON </code> 用来指定权限针对哪些库和表。</li>
+<li><code>*.*</code> 中前面的*号用来指定数据库名，后面的*号用来指定表名。</li>
+<li><code>TO</code> 表示将权限赋予某个用户。</li>
+<li><code>feihong@&#39;localhost&#39;</code> 表示feihong用户，@后面接限制的主机，可以是IP、IP段、域名以及%，%表示任何地方。注意：这里%有的版本不包括本地，以前碰到过给某个用户设置了%允许任何地方登录，但是在本地登录不了，这个和版本有关系，遇到这个问题再加一个localhost的用户就可以了。</li>
+<li><code>IDENTIFIED BY</code> 指定用户的登录密码。</li>
+<li><code>WITH GRANT OPTION</code> 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定WITH GRANT OPTION选项导致后来该用户不能使用GRANT命令创建用户或者给其他用户授权。</li>
+</ul>
+<p>备注：可以使用GRANT重复给用户添加权限，权限叠加，比如你先给用户添加了一个select权限，然后又给用户添加了一个insert权限，那么该用户就同时拥有了select和insert权限。</p>
+<p>注意：修改完权限以后 一定要刷新服务，或者重启服务，刷新服务用：<code>FLUSH PRIVILEGES</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/05/23/Linux%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4find,xargs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1760,176 +1944,6 @@ echo $price_between;//1000以上
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/03/17/yii2-e5-b0-8f-e8-b4-b4-e5-a3-ab-e9-9b-86-e5-90-88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/17/yii2-e5-b0-8f-e8-b4-b4-e5-a3-ab-e9-9b-86-e5-90-88/" class="post-title-link" itemprop="url">Yii2 小贴士集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-03-17 10:56:01" itemprop="dateCreated datePublished" datetime="2016-03-17T10:56:01+08:00">2016-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/Yii/" itemprop="url" rel="index"><span itemprop="name">Yii</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="表单提交失败调试代码"><a href="#表单提交失败调试代码" class="headerlink" title="表单提交失败调试代码"></a>表单提交失败调试代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo array_values($model-&gt;getFirstErrors())[0];exit;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取当前Controller-name和action-name（在控制器里面使用）"><a href="#获取当前Controller-name和action-name（在控制器里面使用）" class="headerlink" title="获取当前Controller name和action name（在控制器里面使用）"></a>获取当前Controller name和action name（在控制器里面使用）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $this-&gt;id;</span><br><span class="line">echo $this-&gt;action-&gt;id;</span><br></pre></td></tr></table></figure>
-
-<h3 id="控制器获取当前模块"><a href="#控制器获取当前模块" class="headerlink" title="控制器获取当前模块"></a>控制器获取当前模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;module-&gt;id</span><br></pre></td></tr></table></figure>
-
-<h3 id="use-yii-log-Logger"><a href="#use-yii-log-Logger" class="headerlink" title="use yii\log\Logger;"></a>use yii\log\Logger;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use yii\log\Logger;</span><br><span class="line">\Yii::getLogger()-&gt;log(&#39;User has been created&#39;, Logger::LEVEL_INFO);</span><br></pre></td></tr></table></figure>
-
-<h3 id="不生成label标签"><a href="#不生成label标签" class="headerlink" title="不生成label标签"></a>不生成label标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ActiveForm类</span><br><span class="line">$form-&gt;field($model, &#39;字段名&#39;)-&gt;passwordInput([&#39;maxlength&#39; &#x3D;&gt; true])-&gt;label(false) ?&gt;</span><br><span class="line">&#x2F;&#x2F; HTML类</span><br><span class="line">Html::activeInput($type,$model,&#39;字段名&#39;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Yii2-获取接口传过来的-JSON-数据："><a href="#Yii2-获取接口传过来的-JSON-数据：" class="headerlink" title="Yii2 获取接口传过来的 JSON 数据："></a>Yii2 获取接口传过来的 JSON 数据：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;request-&gt;rawBody;</span><br></pre></td></tr></table></figure>
-
-<h3 id="防止-SQL-和-Script-注入"><a href="#防止-SQL-和-Script-注入" class="headerlink" title="防止 SQL 和 Script 注入:"></a>防止 SQL 和 Script 注入:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use yii\helpers\Html;</span><br><span class="line">use yii\helpers\HtmlPurifier;</span><br><span class="line"></span><br><span class="line">echo Html::encode($view_hello_str) &#x2F;&#x2F;可以原样显示&lt;script&gt;&lt;&#x2F;script&gt;代码  </span><br><span class="line">echo HtmlPurifier::process($view_hello_str)  &#x2F;&#x2F;可以过滤掉&lt;script&gt;&lt;&#x2F;script&gt;代码 </span><br></pre></td></tr></table></figure>
-
-<h3 id="大于、小于条件查询"><a href="#大于、小于条件查询" class="headerlink" title="大于、小于条件查询"></a>大于、小于条件查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SELECT * FROM &#96;order&#96; WHERE &#96;subtotal&#96; &gt; 200 ORDER BY &#96;id&#96;</span><br><span class="line">$orders &#x3D; $customer-&gt;getOrders()</span><br><span class="line">    -&gt;where([&#39;&gt;&#39;, &#39;subtotal&#39;, 200])</span><br><span class="line">    -&gt;orderBy(&#39;id&#39;)</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<h3 id="搜索的时候添加条件筛选"><a href="#搜索的时候添加条件筛选" class="headerlink" title="搜索的时候添加条件筛选"></a>搜索的时候添加条件筛选</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$dataProvider &#x3D; $searchModel-&gt;search(Yii::$app-&gt;request-&gt;queryParams);</span><br><span class="line">&#x2F;&#x2F; $dataProvider-&gt;query-&gt;andWhere([&#39;pid&#39; &#x3D;&gt; 0]);</span><br><span class="line">$dataProvider-&gt;query-&gt;andWhere([&#39;&gt;&#39;, &#39;pid&#39;, 0]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="有两种方式获取查询出来的-name-为数组的集合-name1-name2-name3-："><a href="#有两种方式获取查询出来的-name-为数组的集合-name1-name2-name3-：" class="headerlink" title="有两种方式获取查询出来的 name 为数组的集合 [name1, name2, name3]："></a>有两种方式获取查询出来的 name 为数组的集合 [name1, name2, name3]：</h3><p>方式一：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return \yii\helpers\ArrayHelper::getColumn(User::find()-&gt;all(), &#39;name&#39;);</span><br></pre></td></tr></table></figure>
-
-<p>方式二：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return User::find()-&gt;select(&#39;name&#39;)-&gt;asArray()-&gt;column();</span><br></pre></td></tr></table></figure>
-
-<h3 id="打印数据"><a href="#打印数据" class="headerlink" title="打印数据"></a>打印数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 引用命名空间</span><br><span class="line">use yii\helpers\VarDumper;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用</span><br><span class="line">VarDumper::dump($var);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;  使用2  第二个参数是数组的深度  第三个参数是是否显示代码高亮（默认不显示）</span><br><span class="line">VarDumper::dump($var, 10 ,true);die;</span><br></pre></td></tr></table></figure>
-
-<h3 id="表单验证，只要需要一个参数"><a href="#表单验证，只要需要一个参数" class="headerlink" title="表单验证，只要需要一个参数"></a>表单验证，只要需要一个参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public function rules()</span><br><span class="line">&#123;</span><br><span class="line">    return [</span><br><span class="line">        [[&#39;card_id&#39;, &#39;card_code&#39;], function ($attribute, $param) &#123;&#x2F;&#x2F;至少要一个</span><br><span class="line">            if (empty($this-&gt;card_code) &amp;&amp; empty($this-&gt;card_id)) &#123;</span><br><span class="line">                $this-&gt;addError($attribute, &#39;card_id&#x2F;card_code至少要填一个&#39;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, &#39;skipOnEmpty&#39; &#x3D;&gt; false],</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="where-多个查询条件示例"><a href="#where-多个查询条件示例" class="headerlink" title="where 多个查询条件示例"></a>where 多个查询条件示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User::find()-&gt;where([&#39;and&#39;, [&#39;xxx&#39; &#x3D;&gt; 0, &#39;yyy&#39; &#x3D;&gt; 2], [&#39;&gt;&#39;, &#39;zzz&#39;, $time]]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取post数据"><a href="#获取post数据" class="headerlink" title="获取post数据"></a>获取post数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$post &#x3D; Yii::$app-&gt;request-&gt;post();</span><br><span class="line">$id &#x3D; $post[&#39;id&#39;];</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找-auth-times-表-type-1-并且-不存在-auth-item-表里面的数据"><a href="#查找-auth-times-表-type-1-并且-不存在-auth-item-表里面的数据" class="headerlink" title="查找 auth_times 表 type=1 并且 不存在 auth_item 表里面的数据"></a>查找 auth_times 表 type=1 并且 不存在 auth_item 表里面的数据</h3><p>查找 <code>auth_times</code> 表 <code>type=1</code> 并且 不存在 <code>auth_item</code> 表里面的数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; AuthItem.php 关键是 onCondition 方法</span><br><span class="line">public function getAuthTimes()</span><br><span class="line">&#123;</span><br><span class="line">    return $this-&gt;hasOne(AuthTimes::className(), [&#39;name&#39; &#x3D;&gt; &#39;name&#39;, ])-&gt;onCondition([AuthTimes::tableName() . &#39;.type&#39; &#x3D;&gt; 1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; AuthTimes.php 文件</span><br><span class="line">&#x2F;&#x2F; ......</span><br><span class="line">AuthItem::find()-&gt;joinWith(&#39;authTimes&#39;)-&gt;where([self::tableName() . &#39;.name&#39; &#x3D;&gt; null])-&gt;all();</span><br></pre></td></tr></table></figure>
-
-<p>生成SQL:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;auth_item&#96;.* FROM &#96;auth_item&#96; LEFT JOIN &#96;auth_times&#96; ON &#96;auth_item&#96;.&#96;name&#96; &#x3D; &#96;auth_times&#96;.&#96;name&#96; AND &#96;auth_times&#96;.&#96;type&#96; &#x3D; 1 WHERE &#96;auth_times&#96;.&#96;name&#96; IS NULL</span><br></pre></td></tr></table></figure>
-
-<h3 id="SQL-is-not-null条件查询"><a href="#SQL-is-not-null条件查询" class="headerlink" title="SQL is not null条件查询"></a>SQL is not null条件查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; [&#39;not&#39; &#x3D;&gt; [&#39;attribute&#39; &#x3D;&gt; null]]</span><br><span class="line"></span><br><span class="line">$query &#x3D; new Query;             </span><br><span class="line">$query-&gt;select(&#39;ID, City,State,StudentName&#39;)</span><br><span class="line">      -&gt;from(&#39;student&#39;)                               </span><br><span class="line">      -&gt;where([&#39;IsActive&#39; &#x3D;&gt; 1])</span><br><span class="line">      -&gt;andWhere([&#39;not&#39;, [&#39;City&#39; &#x3D;&gt; null]])</span><br><span class="line">      -&gt;andWhere([&#39;not&#39;, [&#39;State&#39; &#x3D;&gt; null]])</span><br><span class="line">      -&gt;orderBy([&#39;rand()&#39; &#x3D;&gt; SORT_DESC])</span><br><span class="line">      -&gt;limit(10);</span><br></pre></td></tr></table></figure>
-
-<h3 id="校验-point-template-id-在-PointTemplate-是否存在"><a href="#校验-point-template-id-在-PointTemplate-是否存在" class="headerlink" title="校验 point_template_id 在 PointTemplate 是否存在"></a>校验 point_template_id 在 PointTemplate 是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public function rules()</span><br><span class="line">&#123;</span><br><span class="line">    return [</span><br><span class="line">        ...</span><br><span class="line">        [[&#39;point_template_id&#39;], &#39;exist&#39;,</span><br><span class="line">            &#39;targetClass&#39; &#x3D;&gt; PointTemplate::className(),</span><br><span class="line">            &#39;targetAttribute&#39; &#x3D;&gt; &#39;id&#39;,</span><br><span class="line">            &#39;message&#39; &#x3D;&gt; &#39;此&#123;attribute&#125;不存在。&#39;</span><br><span class="line">        ],</span><br><span class="line">        ...</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Yii给必填项加星"><a href="#Yii给必填项加星" class="headerlink" title="Yii给必填项加星"></a>Yii给必填项加星</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div.required label:after &#123;</span><br><span class="line">    content: &quot; *&quot;;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="view里面获取当前action"><a href="#view里面获取当前action" class="headerlink" title="view里面获取当前action"></a>view里面获取当前action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump(Yii::$app-&gt;controller-&gt;action-&gt;id);</span><br></pre></td></tr></table></figure>
-
-<h3 id="关于事务"><a href="#关于事务" class="headerlink" title="关于事务"></a>关于事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;db-&gt;transaction(function() &#123;</span><br><span class="line">    $order &#x3D; new Order($customer);</span><br><span class="line">    $order-&gt;save();</span><br><span class="line">    $order-&gt;addItems($items);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 这相当于下列冗长的代码：</span><br><span class="line"></span><br><span class="line">$transaction &#x3D; Yii::$app-&gt;db-&gt;beginTransaction();</span><br><span class="line">try &#123;</span><br><span class="line">    $order &#x3D; new Order($customer);</span><br><span class="line">    $order-&gt;save();</span><br><span class="line">    $order-&gt;addItems($items);</span><br><span class="line">    $transaction-&gt;commit();</span><br><span class="line">&#125; catch (\Exception $e) &#123;</span><br><span class="line">    $transaction-&gt;rollBack();</span><br><span class="line">    throw $e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="restful-获取-GET-和-POST-过来的数据（得到结果是数组）"><a href="#restful-获取-GET-和-POST-过来的数据（得到结果是数组）" class="headerlink" title="restful 获取 GET 和 POST 过来的数据（得到结果是数组）"></a>restful 获取 GET 和 POST 过来的数据（得到结果是数组）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; post</span><br><span class="line">Yii::$app-&gt;request-&gt;bodyParams</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; get</span><br><span class="line">Yii::$app-&gt;request-&gt;queryParams;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取GET数据"><a href="#获取GET数据" class="headerlink" title="获取GET数据"></a>获取GET数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$server_id &#x3D; Yii::$app-&gt;getRequest()-&gt;get(&#39;server_id&#39;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="查询的时候-where-的-OR-和-AND-一起用"><a href="#查询的时候-where-的-OR-和-AND-一起用" class="headerlink" title="查询的时候 where 的 OR 和 AND 一起用"></a>查询的时候 where 的 OR 和 AND 一起用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Topic::updateAll(</span><br><span class="line">    [&#39;last_comment_time&#39; &#x3D;&gt; new Expression(&#39;created_at&#39;)],</span><br><span class="line">&#x2F;&#x2F;  [&#39;or&#39;, [&#39;type&#39; &#x3D;&gt; Topic::TYPE, &#39;last_comment_username&#39; &#x3D;&gt; &#39;&#39;], [&#39;type&#39; &#x3D;&gt; Topic::TYPE, &#39;last_comment_username&#39; &#x3D;&gt; null]]</span><br><span class="line">    [&#39;and&#39;, [&#39;type&#39; &#x3D;&gt; Topic::TYPE], [&#39;or&#39;, [&#39;last_comment_username&#39; &#x3D;&gt; &#39;&#39;], [&#39;last_comment_username&#39; &#x3D;&gt; null]]]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>###　嵌套查询，groupBy 分组之后排序功能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$subQuery &#x3D; new Query();</span><br><span class="line">$subQuery-&gt;from(PostComment::tableName())-&gt;where([&#39;status&#39; &#x3D;&gt; PostComment::STATUS_ACTIVE])-&gt;orderBy([&#39;created_at&#39; &#x3D;&gt; SORT_DESC]);</span><br><span class="line">$comment &#x3D; PostComment::find()-&gt;from([&#39;tmpA&#39; &#x3D;&gt; $subQuery])</span><br><span class="line">    -&gt;groupBy(&#39;post_id&#39;)</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<p>生成的语句是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM (SELECT * FROM &#96;post_comment&#96; WHERE &#96;status&#96;&#x3D;1 ORDER BY &#96;created_at&#96; DESC) &#96;tmpA&#96; GROUP BY &#96;post_id&#96;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Model-获取当前-module-id"><a href="#Model-获取当前-module-id" class="headerlink" title="Model 获取当前 module id"></a>Model 获取当前 module id</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;controller-&gt;module-&gt;id</span><br></pre></td></tr></table></figure>
-
-<h3 id="一个控制器调用其他控制器action的方法"><a href="#一个控制器调用其他控制器action的方法" class="headerlink" title="一个控制器调用其他控制器action的方法"></a>一个控制器调用其他控制器action的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;runAction(&#39;new_controller&#x2F;new_action&#39;, $params);</span><br><span class="line">&#x2F;&#x2F; 或者</span><br><span class="line">return (new SecondController(&#39;second&#39;, Yii::$app-&gt;module))-&gt;runAction(&#39;index&#39;, $data);</span><br></pre></td></tr></table></figure>
-
-<h3 id="IP-白名单"><a href="#IP-白名单" class="headerlink" title="IP 白名单"></a>IP 白名单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$config[&#39;modules&#39;][&#39;debug&#39;] &#x3D; [</span><br><span class="line">    &#39;class&#39; &#x3D;&gt; &#39;yii\debug\Module&#39;,</span><br><span class="line">    &#39;allowedIPs&#39; &#x3D;&gt; [&#39;127.0.0.1&#39;, &#39;::1&#39;, &#39;192.168.0.*&#39;, &#39;192.168.33.1&#39;],</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<h3 id="点击下载文件-action"><a href="#点击下载文件-action" class="headerlink" title="点击下载文件 action"></a>点击下载文件 action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public function actionDownload($id)</span><br><span class="line">&#123;</span><br><span class="line">    $model &#x3D; $this-&gt;findModel($id);</span><br><span class="line"></span><br><span class="line">    if ($model) &#123;</span><br><span class="line">        &#x2F;&#x2F; do something</span><br><span class="line">    &#125;</span><br><span class="line">    return \Yii::$app-&gt;response-&gt;setDownloadHeaders($model-&gt;downurl);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="发送邮件-config-config-php中的components配置"><a href="#发送邮件-config-config-php中的components配置" class="headerlink" title="发送邮件 config/config.php中的components配置"></a>发送邮件 config/config.php中的components配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#39;mailer&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;class&#39; &#x3D;&gt; &#39;yii\swiftmailer\Mailer&#39;,</span><br><span class="line">    &#39;useFileTransport&#39; &#x3D;&gt; false,</span><br><span class="line">    &#39;transport&#39; &#x3D;&gt; [</span><br><span class="line">        &#39;class&#39; &#x3D;&gt; &#39;Swift_SmtpTransport&#39;,</span><br><span class="line">        &#39;host&#39; &#x3D;&gt; &#39;smtp.gmail.com&#39;,</span><br><span class="line">        &#39;username&#39; &#x3D;&gt; &#39;admin@gmail.com&#39;,</span><br><span class="line">        &#39;password&#39; &#x3D;&gt; &#39;password12345678&#39;,</span><br><span class="line">        &#39;port&#39; &#x3D;&gt; 587,&#x2F;&#x2F;or 25&#x2F;587</span><br><span class="line">        &#39;encryption&#39; &#x3D;&gt; &#39;tls&#39;,&#x2F;&#x2F;tls or ssl</span><br><span class="line">    ]</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
-
-<p>使用 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;mailer-&gt;compose()</span><br><span class="line">                    -&gt;setFrom([&#39;admin@gmail.com&#39; &#x3D;&gt; Yii::$app-&gt;name])</span><br><span class="line">                    -&gt;setTo(&#39;admin@gmail.com&#39;)</span><br><span class="line">                    -&gt;setSubject(&#39;test subject&#39;)</span><br><span class="line">                    -&gt;setTextBody(&#39;test body&#39;)</span><br><span class="line">                    -&gt;send();</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改登陆状态超时时间（到期后自动退出登陆）-config-web-php中的components"><a href="#修改登陆状态超时时间（到期后自动退出登陆）-config-web-php中的components" class="headerlink" title="修改登陆状态超时时间（到期后自动退出登陆） config/web.php中的components"></a>修改登陆状态超时时间（到期后自动退出登陆） config/web.php中的components</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#39;user&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;class&#39;&#x3D;&gt;&#39;yii\web\User&#39;,</span><br><span class="line">    &#39;identityClass&#39; &#x3D;&gt; &#39;common\models\User&#39;,</span><br><span class="line">    &#39;loginUrl&#39;&#x3D;&gt;[&#39;&#x2F;user&#x2F;sign-in&#x2F;login&#39;],</span><br><span class="line">    &#39;authTimeout&#39; &#x3D;&gt; 1800,&#x2F;&#x2F;登陆有效时间</span><br><span class="line">    &#39;as afterLogin&#39; &#x3D;&gt; &#39;common\behaviors\LoginTimestampBehavior&#39;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改返回的数据格式（详见Response-FORMAT-XXXX）"><a href="#修改返回的数据格式（详见Response-FORMAT-XXXX）" class="headerlink" title="修改返回的数据格式（详见Response::FORMAT_XXXX）"></a>修改返回的数据格式（详见Response::FORMAT_XXXX）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$result &#x3D; array(&#39;code&#39; &#x3D;&gt; $code, &#39;msg&#39; &#x3D;&gt; $msg, &#39;data&#39; &#x3D;&gt; $data);</span><br><span class="line">$callback &#x3D; Yii::$app-&gt;request-&gt;get(&#39;callback&#39;,null);</span><br><span class="line"></span><br><span class="line">$format &#x3D; $callback ? Response::FORMAT_JSONP : Response::FORMAT_JSON;</span><br><span class="line">Yii::$app-&gt;response-&gt;format &#x3D; $format;</span><br><span class="line"></span><br><span class="line">if($callback)&#123;</span><br><span class="line">    return array(</span><br><span class="line">	&#39;callback&#39; &#x3D;&gt; $callback,</span><br><span class="line">	&#39;data&#39; &#x3D;&gt; $result</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">return $result;</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行SQL查询并缓存结果"><a href="#执行SQL查询并缓存结果" class="headerlink" title="执行SQL查询并缓存结果"></a>执行SQL查询并缓存结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$styleId &#x3D; Yii::$app-&gt;request-&gt;get(&#39;style&#39;);</span><br><span class="line">$collection &#x3D; Yii::$app-&gt;db-&gt;cache(function($db) use($styleId)&#123;</span><br><span class="line">    return Collection::findOne([&#39;style_id&#39;&#x3D;&gt;$styleId]);</span><br><span class="line">&#125;, self::SECONDS_IN_MINITUE * 10);</span><br></pre></td></tr></table></figure>
-
-<h3 id="用户头像加域名"><a href="#用户头像加域名" class="headerlink" title="用户头像加域名"></a>用户头像加域名</h3><p>场景: 数据库有<code>user </code>表有个<code>avatar_path </code>字段用来保存用户头像路径</p>
-<p>需求: 头像url需要通过域名<code>http://b.com/</code>作为基本url</p>
-<p>目标: 提高代码复用</p>
-<p>此处<code>http://b.com/</code>可以做成一个配置<br>示例:</p>
-<p><code>User.php</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class User extends \yii\db\ActiveRecord</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    public function extraFields()</span><br><span class="line">    &#123;</span><br><span class="line">        $fields &#x3D; parent::extraFields();</span><br><span class="line">        </span><br><span class="line">        $fields[&#39;avatar_url&#39;] &#x3D; function () &#123;</span><br><span class="line">            return empty($this-&gt;avatar_path) ? &#39;可以设置一个默认的头像地址&#39; : &#39;http:&#x2F;&#x2F;b.com&#x2F;&#39; . $this-&gt;avatar_path;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return $fields;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ExampleController.php</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class ExampleController extends \yii\web\Controller</span><br><span class="line">&#123;</span><br><span class="line">    public function actionIndex()</span><br><span class="line">    &#123;</span><br><span class="line">        $userModel &#x3D; User::find()-&gt;one();</span><br><span class="line">        $userData &#x3D; $userModel-&gt;toArray([], [&#39;avatar_url&#39;]);</span><br><span class="line">        </span><br><span class="line">        echo $userData[&#39;avatar_url&#39;]; &#x2F;&#x2F; 输出内容: http:&#x2F;&#x2F;b.com&#x2F;头像路径</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="避免select里面的子查询被识别成字段"><a href="#避免select里面的子查询被识别成字段" class="headerlink" title="避免select里面的子查询被识别成字段"></a>避免select里面的子查询被识别成字段</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;避免select里面的子查询被识别成字段</span><br><span class="line">$quert &#x3D; User::find()</span><br><span class="line">    -&gt;select([</span><br><span class="line">          new Expression(&#39;count(*) as count , count(distinct mobile) as mnumber&#39;)</span><br><span class="line">     ])-&gt;asArray()</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<h3 id="like-查询"><a href="#like-查询" class="headerlink" title="like 查询"></a>like 查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$query &#x3D; User::find()</span><br><span class="line">    -&gt;where([&#39;LIKE&#39;, &#39;name&#39;, $id.&#39;%&#39;, false]);</span><br></pre></td></tr></table></figure>
-
-<p>来源：<a target="_blank" rel="noopener" href="http://www.getyii.com/topic/47">http://www.getyii.com/topic/47</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1999,7 +2013,7 @@ echo $price_between;//1000以上
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
