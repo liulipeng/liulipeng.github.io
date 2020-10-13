@@ -27,9 +27,9 @@
 <meta property="og:site_name" content="紫悦博客">
 <meta property="og:description" content="事务的四大特性(ACID)原子性（Atomicity）　　原子性是指事务是一个不可分割的工作单位，事务中的操作要么全部成功，要么全部失败。比如在同一个事务中的SQL语句，要么全部执行成功，要么全部执行失败 一致性（Consistency）　　官网上事务一致性的概念是：事务必须使数据库从一个一致性状态变换到另外一个一致性状态。以转账为例子，A向B转账，假设转账之前这两个用户的钱加起来总共是200">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.izyue.com/2017/08/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
-<meta property="og:image" content="http://www.izyue.com/2017/08/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/1.png">
-<meta property="og:image" content="http://www.izyue.com/2017/08/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/2.png">
+<meta property="og:image" content="http://www.izyue.com/.com//f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
+<meta property="og:image" content="http://www.izyue.com/.com//1.png">
+<meta property="og:image" content="http://www.izyue.com/.com//2.png">
 <meta property="article:published_time" content="2017-08-21T03:22:46.000Z">
 <meta property="article:modified_time" content="2020-10-13T06:53:26.583Z">
 <meta property="article:author" content="紫悦">
@@ -37,7 +37,7 @@
 <meta property="article:tag" content="事务">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.izyue.com/2017/08/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
+<meta name="twitter:image" content="http://www.izyue.com/.com//f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
 
 <link rel="canonical" href="http://www.izyue.com/2017/08/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
 
@@ -267,7 +267,7 @@
 <h1 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h1><h2 id="事务不考虑隔离性可能会引发的问题"><a href="#事务不考虑隔离性可能会引发的问题" class="headerlink" title="事务不考虑隔离性可能会引发的问题　　"></a>事务不考虑隔离性可能会引发的问题　　</h2><p>如果事务不考虑隔离性，可能会引发如下问题：</p>
 <h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>​    <strong>脏读指一个事务读取了另外一个事务未提交的数据</strong>。</p>
 <p>​    公司发工资了，领导把5000元打到singo的账号上，但是该事务并未提交，而singo正好去查看账户，发现工资已经到账，是5000元整，非常高兴。可是不幸的是，领导发现发给singo的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后singo实际的工资只有2000元，singo空欢喜一场。　</p>
-<p><img src="%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif" alt="img"></p>
+<p><img src="/.com//f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif" alt="img"></p>
 <p>出现上述情况，即我们所说的脏读，两个并发的事务，“事务A：领导给singo发工资”、“事务B：singo查询工资账户”，事务B读取了事务A尚未提交的数据。</p>
 <p>当隔离级别设置为Read uncommitted时，就可能出现脏读，如何避免脏读，请看下一个隔离级别。</p>
 <h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>　　<strong>不可重复读指在一个事务内读取表中的某一行数据，多次读取结果不同。</strong></p>
@@ -291,11 +291,11 @@
 </ol>
 <p>　　mysql数据库查询当前事务隔离级别：<code>select @@tx_isolation</code></p>
 <p><strong>例如:</strong></p>
-<p>　　<img src="%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/1.png" alt="img"></p>
+<p>　　<img src="/.com//1.png" alt="img"></p>
 <p>　　<strong>mysql数据库默认的事务隔离级别</strong>是：<code>Repeatable read(可重复读)</code></p>
 <p>　　mysql数据库设置事务隔离级别：<code>set transaction isolation level 隔离级别名</code></p>
 <p><strong>例如:</strong></p>
-<p><img src="%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E4%BB%A5%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/2.png" alt="img"></p>
+<p><img src="/.com//2.png" alt="img"></p>
 <h2 id="使用MySQL数据库演示不同隔离级别下的并发问题"><a href="#使用MySQL数据库演示不同隔离级别下的并发问题" class="headerlink" title="使用MySQL数据库演示不同隔离级别下的并发问题"></a>使用MySQL数据库演示不同隔离级别下的并发问题</h2><p>同时打开两个窗口模拟2个用户并发访问数据库</p>
 <h3 id="当把事务的隔离级别设置为read-uncommitted时，会引发脏读、不可重复读和虚读"><a href="#当把事务的隔离级别设置为read-uncommitted时，会引发脏读、不可重复读和虚读" class="headerlink" title="当把事务的隔离级别设置为read uncommitted时，会引发脏读、不可重复读和虚读"></a>当把事务的隔离级别设置为read uncommitted时，会引发脏读、不可重复读和虚读</h3><ol>
 <li>A窗口<ol>
