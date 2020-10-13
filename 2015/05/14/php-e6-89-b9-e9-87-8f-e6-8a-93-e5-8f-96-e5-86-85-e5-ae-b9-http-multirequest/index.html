@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.izyue.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"appID":"1F782C8MAO","apiKey":"e339c5b681f0ac779a02cbf3af734758","indexName":"izyue","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&lt;?php class Http_MultiRequest {     &#x2F;&#x2F;要并行抓取的url 列表     private $urls &#x3D; array();      &#x2F;&#x2F;curl 的选项     private $options;      &#x2F;&#x2F;构造函数     function __construct($options &#x3D; array())     {         $this-&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 批量抓取内容 Http_MultiRequest">
+<meta property="og:url" content="http://www.izyue.com/2015/05/14/php-e6-89-b9-e9-87-8f-e6-8a-93-e5-8f-96-e5-86-85-e5-ae-b9-http-multirequest/index.html">
+<meta property="og:site_name" content="紫悦博客">
+<meta property="og:description" content="&lt;?php class Http_MultiRequest {     &#x2F;&#x2F;要并行抓取的url 列表     private $urls &#x3D; array();      &#x2F;&#x2F;curl 的选项     private $options;      &#x2F;&#x2F;构造函数     function __construct($options &#x3D; array())     {         $this-&amp;g">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-05-14T01:58:24.000Z">
+<meta property="article:modified_time" content="2020-10-13T06:53:26.574Z">
+<meta property="article:author" content="紫悦">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="批量抓取">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.izyue.com/2015/05/14/php-e6-89-b9-e9-87-8f-e6-8a-93-e5-8f-96-e5-86-85-e5-ae-b9-http-multirequest/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP 批量抓取内容 Http_MultiRequest | 紫悦博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">紫悦博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不进则退，退一步万丈悬崖！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-yii2-admin">
+
+    <a href="/yii2-admin" rel="section"><i class="fa fa-star fa-fw"></i>yii2-admin</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/liulipeng" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/php-e6-89-b9-e9-87-8f-e6-8a-93-e5-8f-96-e5-86-85-e5-ae-b9-http-multirequest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP 批量抓取内容 Http_MultiRequest
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-05-14 09:58:24" itemprop="dateCreated datePublished" datetime="2015-05-14T09:58:24+08:00">2015-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <pre class="prettyprint lang-php linenums">&lt;?php
+class Http_MultiRequest
+{
+    //要并行抓取的url 列表
+    private $urls = array();
+
+    //curl 的选项
+    private $options;
+
+    //构造函数
+    function __construct($options = array())
+    {
+        $this-&gt;setOptions($options);
+    }
+
+    //设置url 列表
+    function setUrls($urls)
+    {
+        $this-&gt;urls = $urls;
+        return $this;
+    }
+
+    //设置选项
+    function setOptions($options)
+    {
+        $options[CURLOPT_RETURNTRANSFER] = 1;
+        if (isset($options['HTTP_POST'])) 
+        {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $options['HTTP_POST']);
+            unset($options['HTTP_POST']);
+        }
+
+        if (!isset($options[CURLOPT_USERAGENT])) 
+        {
+            $options[CURLOPT_USERAGENT] = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1;)';
+        }
+
+        if (!isset($options[CURLOPT_FOLLOWLOCATION])) 
+        {
+            $options[CURLOPT_FOLLOWLOCATION] = 1;
+        }
+
+        if (!isset($options[CURLOPT_HEADER]))
+        {
+            $options[CURLOPT_HEADER] = 0;
+        }
+        $this-&gt;options = $options;
+    }
+
+    //并行抓取所有的内容
+    function exec()
+    {
+        if(empty($this-&gt;urls) || !is_array($this-&gt;urls))
+        {
+            return false;
+        }
+        $curl = $data = array();
+        $mh = curl_multi_init();
+        foreach($this-&gt;urls as $k =&gt; $v)
+        {
+            $curl[$k] = $this-&gt;addHandle($mh, $v);
+        }
+        $this-&gt;execMulitHandle($mh);
+        foreach($this-&gt;urls as $k =&gt; $v)
+        {
+            $data[$k] = curl_multi_getcontent($curl[$k]);
+            curl_multi_remove_handle($mh, $curl[$k]);
+        }
+        curl_multi_close($mh);
+        return $data;
+    }
+
+    //只抓取一个网页的内容。
+    function execOne($url)
+    {
+        if (empty($url)) {
+            return false;
+        }
+        $ch = curl_init($url);
+        $this-&gt;setOneOption($ch);
+        $content = curl_exec($ch);
+        curl_close($ch);
+        return $content;
+    }
+
+    //内部函数，设置某个handle 的选项
+    private function setOneOption($ch)
+    {
+        curl_setopt_array($ch, $this-&gt;options);
+    }
+
+    //添加一个新的并行抓取 handle
+    private function addHandle($mh, $url)
+    {
+        $ch = curl_init($url);
+        $this-&gt;setOneOption($ch);
+        curl_multi_add_handle($mh, $ch);
+        return $ch;
+    }
+
+    //并行执行(这样的写法是一个常见的错误，我这里还是采用这样的写法，这个写法
+    //下载一个小文件都可能导致cup占用100%, 并且，这个循环会运行10万次以上
+    //这是一个典型的不懂原理产生的错误。这个错误在PHP官方的文档上都相当的常见。）
+    private function execMulitHandle($mh)
+    {
+        $running = null;
+        do {
+            curl_multi_exec($mh, $running);
+        } while ($running &gt; 0);
+    }
+}
+
+/*下面是上面的类的一个测试的例子：*/
+
+//$urls = array("http://www.baidu.com", "http://www.google.com", "http://www.sina.com.cn", "http://www.newsnow.com.cn/about/", "http://liulipeng01.blog.163.com");
+$m = new Http_MultiRequest();
+$urls = array("http://test3.99kt.com/index.php");
+$t = microtime(true);
+$m-&gt;setUrls($urls);
+
+//parallel fetch（并行抓取）:
+$data = $m-&gt;exec();
+
+$parallel_time = microtime(true) - $t;
+echo $parallel_time . "\n";
+
+$t = microtime(true);
+
+//serial fetch（串行抓取）:
+$data = array();
+foreach ($urls as $url)
+{
+    $data[] = $m-&gt;execOne($url);
+}
+$serial_time = microtime(true) - $t;
+echo $serial_time . "\n";
+
+die;
+?&gt;</pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/%E6%89%B9%E9%87%8F%E6%8A%93%E5%8F%96/" rel="tag"># 批量抓取</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/05/14/php-e4-bd-bf-e7-94-a8socket-e9-80-9a-e8-bf-87post-e7-9a-84-e6-96-b9-e5-bc-8f-e6-9d-a5-e8-af-b7-e6-b1-82-e9-a1-b5-e9-9d-a2/" rel="prev" title="PHP使用socket通过POST的方式来请求页面">
+      <i class="fa fa-chevron-left"></i> PHP使用socket通过POST的方式来请求页面
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/05/14/php-e5-88-a4-e6-96-ad-e5-ad-97-e7-ac-a6-e7-bc-96-e7-a0-81/" rel="next" title="PHP 判断字符编码">
+      PHP 判断字符编码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">紫悦</p>
+  <div class="site-description" itemprop="description">不进则退，退一步万丈悬崖！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liulipeng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liulipeng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liu.lipeng@icloud.com" title="E-Mail → mailto:liu.lipeng@icloud.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/liulipeng01" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;liulipeng01" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:liu.lipeng?call|chat" title="Skype → skype:liu.lipeng?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://ljh.name/" title="http:&#x2F;&#x2F;ljh.name&#x2F;" rel="noopener" target="_blank">LJH</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://pages.coding.mem/" title="https:&#x2F;&#x2F;pages.coding.mem" rel="noopener" target="_blank">Coding Pages</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">紫悦</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'a5973ad341c130516935',
+      clientSecret: '5a89f3c451f0e6fb1f7b588e608aef0ec0b46dd2',
+      repo        : '',
+      owner       : 'liulipeng',
+      admin       : ['liulipeng'],
+      id          : 'a7fea0672b84acffcf8ebb25bc3cceb1',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

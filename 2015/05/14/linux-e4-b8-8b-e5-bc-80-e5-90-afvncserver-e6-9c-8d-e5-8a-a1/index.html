@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.izyue.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"appID":"1F782C8MAO","apiKey":"e339c5b681f0ac779a02cbf3af734758","indexName":"izyue","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一．开启vncserver，任何时间都可以连接 如果服务器是在机房内，平时无人职守，或者无法在本机登陆桌面，就无法使用远程桌面，我们只能求助于vncserver。 1.首先确认系统是否安装了vnc： [root@web~]# rpm -qa | grep vnc 如果没有任何显示，则说明系统没有安装vnc包，需要至CentOS 5.4安装光盘下CentOS目录下寻找两个vnc开头的安装包，即： v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下开启VNCserver服务">
+<meta property="og:url" content="http://www.izyue.com/2015/05/14/linux-e4-b8-8b-e5-bc-80-e5-90-afvncserver-e6-9c-8d-e5-8a-a1/index.html">
+<meta property="og:site_name" content="紫悦博客">
+<meta property="og:description" content="一．开启vncserver，任何时间都可以连接 如果服务器是在机房内，平时无人职守，或者无法在本机登陆桌面，就无法使用远程桌面，我们只能求助于vncserver。 1.首先确认系统是否安装了vnc： [root@web~]# rpm -qa | grep vnc 如果没有任何显示，则说明系统没有安装vnc包，需要至CentOS 5.4安装光盘下CentOS目录下寻找两个vnc开头的安装包，即： v">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-05-14T02:19:39.000Z">
+<meta property="article:modified_time" content="2020-10-13T06:53:26.595Z">
+<meta property="article:author" content="紫悦">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="VNC">
+<meta property="article:tag" content="远程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.izyue.com/2015/05/14/linux-e4-b8-8b-e5-bc-80-e5-90-afvncserver-e6-9c-8d-e5-8a-a1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux下开启VNCserver服务 | 紫悦博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">紫悦博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不进则退，退一步万丈悬崖！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-yii2-admin">
+
+    <a href="/yii2-admin" rel="section"><i class="fa fa-star fa-fw"></i>yii2-admin</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/liulipeng" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/linux-e4-b8-8b-e5-bc-80-e5-90-afvncserver-e6-9c-8d-e5-8a-a1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux下开启VNCserver服务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-05-14 10:19:39" itemprop="dateCreated datePublished" datetime="2015-05-14T10:19:39+08:00">2015-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一．开启vncserver，任何时间都可以连接</p>
+<p>如果服务器是在机房内，平时无人职守，或者无法在本机登陆桌面，就无法使用远程桌面，我们只能求助于vncserver。</p>
+<p><strong>1.首先确认系统是否安装了vnc：</strong></p>
+<p><strong>[root@web~]# rpm -qa | grep vnc</strong></p>
+<p>如果没有任何显示，则说明系统没有安装vnc包，需要至CentOS 5.4安装光盘下CentOS目录下寻找两个vnc开头的安装包，即：</p>
+<p>vnc-4.1.2-14.el5_3.1.i386.rpm</p>
+<p>vnc-server-4.1.2-14.el5_3.1.i386.rpm</p>
+<p>使用root用户安装：</p>
+<p>[root@web~]# rpm -ivh vnc-4.1.2-14.el5_3.1.i386.rpm</p>
+<p>[root@web~]# rpm -ivh vnc-server-4.1.2-14.el5_3.1.i386.rpm</p>
+<p>安装好后，可以再次执行：</p>
+<p>[root@web~]# rpm -qa | grep vnc</p>
+<p>如果显示：</p>
+<p>vnc-server-4.1.2-14.el5_3.1 （主要是这个套件包，有这个就行了）</p>
+<p>vnc-4.1.2-14.el5_3.1</p>
+<p>则说明已经安装成功，如果第一次执行后就显示，说明系统已经安装了vnc包。</p>
+<p><strong>2.配置vncservers文件</strong></p>
+<p>[root@web~]# vim /etc/sysconfig/vncservers</p>
+<p>在文件最后加上：</p>
+<p><strong>VNCSERVERS=”1:root”                      设置登录“显示号”和用户</strong></p>
+<p><strong>VNCSERVERARGS[1]=”-geometry 1024x768”    设置屏幕分辨率</strong></p>
+<p><strong>3.配置xstartup文件</strong></p>
+<p>编辑配置之前，需要使用vncserver命令创建默认配置文件</p>
+<p>[root@web~]# vncserver</p>
+<p>输入口令：123</p>
+<p>确认口令：123</p>
+<p>[root@web~]# vim /root/.vnc/xstartup</p>
+<p>#!/bin/sh</p>
+<p>#Uncomment the following two lines for normal desktop:</p>
+<p>unset SESSION_MANAGER   （去掉前面的注释号）</p>
+<p>exec /etc/X11/xinit/xinitrc（去掉前面的注释号）</p>
+<p>[ -x /etc/vnc/xstartup ] exec /etc/vnc/xstartup</p>
+<p>[ -r $HOME/.Xresources ] xrdb $HOME/.Xresources</p>
+<p>xsetroot -solid grey</p>
+<p>vncconfig -iconic  &amp;</p>
+<p>xterm -geometry 80x24+10+10 -ls -title “$VNCDESKTOP Desktop” &amp;</p>
+<p>twm &amp;</p>
+<p>gnome-session &amp; set starting GNOME desktop （增加这一行，表使用gnome界面，否则是xfce界面）</p>
+<p>保存后退出。</p>
+<p>4.设置远程登录口令</p>
+<p>[root@web~]# vncpasswd</p>
+<p>Password:123456</p>
+<p>Verifu:123456</p>
+<p>5.启动vncserver服务</p>
+<p>（1）主服务启动：</p>
+<p>[root@web~]# service vncserver start （只启动/etc/sysconfig/vncservers 所定义的界面）</p>
+<p>启动 VNC 服务器：1:root</p>
+<p>New ‘[主机名]:1 (root)’ desktop is [主机名]:1</p>
+<p>Starting applications specified in /root/.vnc/xstartup</p>
+<p>Log file is /root/.vnc/[主机名]:1.log</p>
+<p>（2）启动多个界面（如果只要一界面，这步可省略）</p>
+<p>[root@web~]# vncserver  :2  （启动root登录的第二个界面）</p>
+<p>6.停止vncserver服务</p>
+<p>[root@web~]# service vncserver stop（停止start时候所启动的界面:1，其它另启的界面:2不停止）</p>
+<p>[root@web~]# vncserver -kill :1  （停止某个界面，要用kill命令来杀掉界面1的进程）</p>
+<p>[root@web~]# vncserver -kill :2  （停止某个界面，要用kill命令来杀掉界面2的进程）</p>
+<p>通过 #service vncserver status 命令可以查看出有多少个进程pid号，表示启动了多少个界面。</p>
+<p>7.让vncserver服务随机启动</p>
+<p>默认状态下，vncserver服务不是开机自动启动，需要手工启动。</p>
+<p>[root@web~]# chkconfig –list vncserver</p>
+<p>[root@web~]# chkconfig vncserver on</p>
+<p>保存后，重启测试。</p>
+<p>8.客户端登录vncserver服务</p>
+<p>（1）先安装vncviewer来远程登录，</p>
+<p>（2）然后在地址栏输入“主机地址:1”（即主机IP加界面号的方式）</p>
+<p>确定后输入登录口令。</p>
+<p><a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2012-11/74076.htm">http://www.linuxidc.com/Linux/2012-11/74076.htm</a></p>
+<p>==============================</p>
+<p>另一个：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.51bbo.com/archives/7">http://blog.51bbo.com/archives/7</a></p>
+<p>CentOS下安装vncServer及应用</p>
+<p>&nbsp;</p>
+<p>1.确认安装vncserver(centos下)<br>[root@zhouda .vnc]# rpm -aq |grep vnc<br>vnc-server-4.1.2-14.el5_6.6</p>
+<p>2.开始配置vncserver：</p>
+<p>管理员：<br>[root@zhouda/]# vncserver<br>password:123456<br>verify:  123456<br>普通用户：<br>[root@zhouda/]# su admin<br>[root@zhouda/]# vncserver<br>password:123456<br>verify:  123456</p>
+<p>启动vncserver:<br>[root@zhouda /]# vncserver</p>
+<p>3.修改桌面相关配置：<br>vi /root/.vnc/xstartup</p>
+<p>如下：<br>#!/bin/sh</p>
+<h1 id="Uncomment-the-following-two-lines-for-normal-desktop"><a href="#Uncomment-the-following-two-lines-for-normal-desktop" class="headerlink" title="Uncomment the following two lines for normal desktop:"></a>Uncomment the following two lines for normal desktop:</h1><h1 id="unset-SESSION-MANAGER"><a href="#unset-SESSION-MANAGER" class="headerlink" title="unset SESSION_MANAGER"></a>unset SESSION_MANAGER</h1><h1 id="exec-etc-X11-xinit-xinitrc"><a href="#exec-etc-X11-xinit-xinitrc" class="headerlink" title="exec /etc/X11/xinit/xinitrc"></a>exec /etc/X11/xinit/xinitrc</h1><p>[ -x /etc/vnc/xstartup ] &amp;&amp; exec /etc/vnc/xstartup<br>[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources<br>xsetroot -solid grey<br>vncconfig -iconic &amp;<br>xterm -geometry 80x24+10+10 -ls -title “$VNCDESKTOP Desktop” &amp;</p>
+<p>gnome-session gnome</p>
+<p>twm &amp;</p>
+<p>修改配置文件添加登录帐号：<br>[root@zhouda ~]# vi /etc/sysconfig/vncservers</p>
+<p>VNCSERVERS=”1:root 2:admin”<br>VNCSERVERARGS[1]=”-geometry 800x600 -nolisten tcp -nohttpd -localhost”<br>VNCSERVERARGS[2]=”-geometry 800x600 -nolisten tcp -nohttpd -localhost”</p>
+<p>4.在windows下安装vnc客户端(相同版本的)</p>
+<p>5.打开客户端输入：ip:prot<br>回车再输入密码，就可以连接上了</p>
+<p>6.如果要修改vcn密码：<br>vncpasswd</p>
+<p>把端口添加到防火墙上：<br>[root@zhouda ~]# iptables -A RH-Firewall-1-INPUT -p tcp -m state –state NEW -m tcp –dport 5906 -j ACCEPT</p>
+<p>VNC连接不上服务器,提示Connection refused(10061)</p>
+<p>使用VNC连接服务器,连不上,总提示unable to connect to host: Connection refused(10061)</p>
+<p>有两点需要注意:</p>
+<p>1.VNC 3.x的默认端口是8500,4.x默认的端口是5900,连接时填写的地势是ip:prot,不能光填写IP</p>
+<p>2.需要先要在Gnom的System-Administration-Security Level and Firewall里面添加VNC连接需要的端口.</p>
+<p>比如用vnc viewer连接192.168.227.130,应该输入192.168.227.130:5900,这是连接该机第一个vnc服务，第二个就是192.168.227.130:5901。<br>在目标机器上运行vncserver可以开启新的服务，每次端口+1<br>如果默认端口连不上，可以试试telnet到目标机器上运行一次vncserver，再连接新端口的服务试试。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/VNC/" rel="tag"># VNC</a>
+              <a href="/tags/%E8%BF%9C%E7%A8%8B/" rel="tag"># 远程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/05/14/linux-e4-b8-8b-e8-a7-a3-e5-8e-8b-tar-gz-e7-9a-84-e5-91-bd-e4-bb-a4/" rel="prev" title="linux下解压.tar.gz的命令">
+      <i class="fa fa-chevron-left"></i> linux下解压.tar.gz的命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/05/14/jquery-e9-80-89-e6-8b-a9-e5-99-a8/" rel="next" title="JQuery 选择器">
+      JQuery 选择器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Uncomment-the-following-two-lines-for-normal-desktop"><span class="nav-number">1.</span> <span class="nav-text">Uncomment the following two lines for normal desktop:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unset-SESSION-MANAGER"><span class="nav-number">2.</span> <span class="nav-text">unset SESSION_MANAGER</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exec-etc-X11-xinit-xinitrc"><span class="nav-number">3.</span> <span class="nav-text">exec &#x2F;etc&#x2F;X11&#x2F;xinit&#x2F;xinitrc</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">紫悦</p>
+  <div class="site-description" itemprop="description">不进则退，退一步万丈悬崖！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liulipeng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liulipeng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liu.lipeng@icloud.com" title="E-Mail → mailto:liu.lipeng@icloud.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/liulipeng01" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;liulipeng01" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:liu.lipeng?call|chat" title="Skype → skype:liu.lipeng?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://ljh.name/" title="http:&#x2F;&#x2F;ljh.name&#x2F;" rel="noopener" target="_blank">LJH</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://pages.coding.mem/" title="https:&#x2F;&#x2F;pages.coding.mem" rel="noopener" target="_blank">Coding Pages</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">紫悦</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'a5973ad341c130516935',
+      clientSecret: '5a89f3c451f0e6fb1f7b588e608aef0ec0b46dd2',
+      repo        : '',
+      owner       : 'liulipeng',
+      admin       : ['liulipeng'],
+      id          : '6b8c2c5075c64613d23d043031897337',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

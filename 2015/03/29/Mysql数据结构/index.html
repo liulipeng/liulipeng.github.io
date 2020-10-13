@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.izyue.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"appID":"1F782C8MAO","apiKey":"e339c5b681f0ac779a02cbf3af734758","indexName":"izyue","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我们要把现实世界中的各种信息转换成计算机能理解的东西，这些转换后 的信息就形成了数据。例 如，某人的出生日期是“1987年5月23日”，他的身高是170厘米，等等。数据不仅包括数字、字母、文字和其他特殊字符组成的文本形式的数据，而且还 包括图形、图像、动画、影像、声音等多媒体数据。但使用最多、最基本的仍然是文本数据。1. MySQL的数据类型 在MySQL中有如下几种数据类型： （1）数值型 数值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql数据结构">
+<meta property="og:url" content="http://www.izyue.com/2015/03/29/Mysql%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="紫悦博客">
+<meta property="og:description" content="我们要把现实世界中的各种信息转换成计算机能理解的东西，这些转换后 的信息就形成了数据。例 如，某人的出生日期是“1987年5月23日”，他的身高是170厘米，等等。数据不仅包括数字、字母、文字和其他特殊字符组成的文本形式的数据，而且还 包括图形、图像、动画、影像、声音等多媒体数据。但使用最多、最基本的仍然是文本数据。1. MySQL的数据类型 在MySQL中有如下几种数据类型： （1）数值型 数值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-03-29T01:47:52.000Z">
+<meta property="article:modified_time" content="2020-10-13T06:53:26.588Z">
+<meta property="article:author" content="紫悦">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.izyue.com/2015/03/29/Mysql%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mysql数据结构 | 紫悦博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">紫悦博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">不进则退，退一步万丈悬崖！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-yii2-admin">
+
+    <a href="/yii2-admin" rel="section"><i class="fa fa-star fa-fw"></i>yii2-admin</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/liulipeng" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/03/29/Mysql%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql数据结构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-03-29 09:47:52" itemprop="dateCreated datePublished" datetime="2015-03-29T09:47:52+08:00">2015-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我们要把现实世界中的各种信息转换成计算机能理解的东西，这些转换后 的信息就形成了数据。例 如，某人的出生日期是“1987年5月23日”，他的身高是170厘米，等等。数据不仅包括数字、字母、文字和其他特殊字符组成的文本形式的数据，而且还 包括图形、图像、动画、影像、声音等多媒体数据。但使用最多、最基本的仍然是文本数据。<br>1. MySQL的数据类型</p>
+<p>在MySQL中有如下几种数据类型：</p>
+<p>（1）数值型</p>
+<p>数值是诸如32 或153.4 这样的值。MySQL 支持科学表示法，科学表示法由整数或浮点数后跟“e”或“E”、一个符号（“+”或“-”）和一个整数指数来表示。1.24E+12 和23.47e-1 都是合法的科学表示法表示的数。而1.24E12 不是合法的，因为指数前的符号未给出。</p>
+<p>浮点数由整数部分、一个小数点和小数部分组成。整数部分和小数部分可以分别为空，但不能同时为空。</p>
+<p>数值前可放一个负号“-”以表示负值。</p>
+<p>（2）字符（串）型</p>
+<p>字符型（也叫字符串型，简称串）是诸如“Hello, world!”或“一个馒头引起的血案”这样的值，或者是电话号码87398413这样的值。既可用单引号也可用双引号将串值括起来。</p>
+<p>初学者往往分不清数值87398143和字符串87398143的区 别。都是数字啊，怎么一 个要用数值型，一个要用字符型呢？关键就在于：数值型的87398143是要参与计算的，比如它是金融中的一个货款总额；而字符型的87398143是不 参与计算的，只是表示电话号码，这样的还有街道号码、门牌号码等等，它们都不参与计算。</p>
+<p>（3）日期和时间型</p>
+<p>日期和时间是一些诸如“2006-07-12”或“12:30:43”这样的值。MySQL还支持日期/时间的组合，如“2006-07-12 12:30:43”。</p>
+<p>（4）NULL值</p>
+<p>NULL表示未知值。比如填写表格中通讯地址不清楚留空不填写，这就是NULL值。</p>
+<p>我们用Create Table语句创建一个表（参看前面的章节），这个表中包含列的定义。例如我们在前面创建了一个joke表，这个表中有content和writer两个列：</p>
+<p>定义一个列的语法如下：</p>
+<p>其中列名由col_name 给出。列名可最多包含64个字符，字符包括字母、数字、下划线及美元符号。列名可以名字中合法的任何符号（包括数字）开头。但列名不能完全由数字组成，因 为那样可能使其与数据分不开。MySQL保留诸如SELECT、DELETE和CREATE这样的词，这些词不能用做列名，但是函数名（如POS 和MIN）是可以使用的。</p>
+<p>列类型col_type表示列可存储的特定值。列类型说明符还能表示 存放在列中的值的最大长 度。对于某些类型，可用一个数值明确地说明其长度。而另外一些值，其长度由类型名蕴含。例如，CHAR(10) 明确指定了10个字符的长度，而TINYBLOB值隐含最大长度为255个字符。有的类型说明符允许指定最大的显示宽度（即显示值时使用多少个字符）。浮 点类型允许指定小数位数，所以能控制浮点数的精度值为多少。</p>
+<p>可以在列类型之后指定可选的类型说明属性，以及指定更多的常见属性。属性起修饰类型的作用，并更改其处理列值的方式，属性有以下类型：</p>
+<p>（1）专用属性用于指定列。例如，UNSIGNED 属性只针对整型，而BINARY属性只用于CHAR 和VARCHAR。</p>
+<p>（2）通用属性除少数列之外可用于任意列。可以指定NULL 或NOT NULL 以表示某个列是否能够存放NULL。还可以用DEFAULT，def_value 来表示在创建一个新行但未明确给出该列的值时，该列可赋予值def_value。def_value 必须为一个常量；它不能是表达式，也不能引用其他列。不能对BLOB 或TEXT 列指定缺省值。</p>
+<p>如果想给出多个列的专用属性，可按任意顺序指定它们，只要它们跟在列类型之后、通用属性之前即可。类似地，如果需要给出多个通用属性，也可按任意顺序给出它们，只要将它们放在列类型和可能给出的列专用属性之后即可。</p>
+<p>2. MySQL的列（字段）类型</p>
+<p>数据库中的每个表都是由一个或多个列（字段）构成的。在用CREATE TABLE语句创建一个表时，要为每列（字段）指定一个类型。列（字段）的类型比数据类型更为细化，它精确地描述了给定表列（字段）可能包含的值的种类，如是否带小数、是否文字很多。</p>
+<p>MySQL有整数和浮点数值的列类型，如表1所示。整数列类型可以有符号也可无符号。有一种特殊的属性允许整数列值自动生成，这对需要唯一序列或标识号的应用系统来说是非常有用的。</p>
+<p>类型</p>
+<p>说明</p>
+<p>TINYINT 非常小的整数<br>SMALLINT 较小整数<br>MEDIUMINT 中等大小整数<br>INT 标准整数<br>BIGINT 较大整数<br>FLOAT 单精度浮点数<br>DOUBLE 双精度浮点数<br>DECIMAL 一个串的浮点数<br>表1：数值列类型<br>每种数值类型的名称和取值范围如表2所示。</p>
+<p>类型说明</p>
+<p>取值范围</p>
+<p>TINYINT[(M)] 有符号值：-128 到127（- 27 到27 - 1）<br>无符号值：0到255（0 到28 - 1）<br>SMALLINT[(M)] 有符号值：-32768 到32767（- 215 到215 - 1）<br>无符号值：0到65535（0 到21 6 - 1）<br>MEDIUMINT[(M)] 有符号值：-8388608 到8388607（- 22 3 到22 3 - 1 ）<br>无符号值：0到16777215（0 到22 4 - 1）<br>INT[(M)] 有符号值：-2147683648 到2147683647（- 231 到231- 1）<br>无符号值：0到4294967295（0 到232 - 1）<br>BIGINT[(M)] 有符号值：-9223372036854775808 到9223373036854775807（- 263到263-1）<br>无符号值：0到18446744073709551615（0到264 – 1）<br>FLOAT[(M, D)] 最小非零值：±1.175494351E - 38<br>DOUBLE[(M,D)] 最小非零值：±2.2250738585072014E - 308<br>DECIMAL (M, D) 可变；其值的范围依赖于M 和D<br>表2：数值列类型的取值范围<br>类型说明</p>
+<p>存储需求</p>
+<p>TINYINT[(M)] 1字节<br>SMALLINT[(M)] 2字节<br>MEDIUMINT[(M)] 3字节<br>INT[(M)] 4字节<br>BIGINT[(M)] 8字节<br>FLOAT[(M, D)] 4字节<br>DOUBLE[(M, D)] 8字节<br>DECIMAL (M, D) M字节（MySQL &lt; 3.23），M+2字节（MySQL &gt; 3.23 ）<br>表3：数值列类型的存储需求<br>MySQL提供了五种整型： TINYINT、SMALLINT、MEDIUMINT、INT和BIGINT。INT为INTEGER的缩写。这些类型在可表示的取值范围上是不同的。 整数列可定义为UNSIGNED从而禁用负值；这使列的取值范围为0以上。各种类型的存储量需求也是不同的。取值范围较大的类型所需的存储量较大。</p>
+<p>MySQL 提供三种浮点类型： FLOAT、DOUBLE和DECIMAL。与整型不同，浮点类型不能是UNSIGNED的，其取值范围也与整型不同，这种不同不仅在于这些类型有最大 值，而且还有最小非零值。最小值提供了相应类型精度的一种度量，这对于记录科学数据来说是非常重要的（当然，也有负的最大和最小值）。</p>
+<p>在选择了某种数值类型时，应该考虑所要表示的值的范围，只需选择能覆 盖要取值的范围的最小类 型即可。选择较大类型会对空间造成浪费，使表不必要地增大，处理起来没有选择较小类型那样有效。对于整型值，如果数据取值范围较小，如人员年龄或兄弟姐妹 数，则TINYINT最合适。MEDIUMINT能够表示数百万的值并且可用于更多类型的值，但存储代价较大。BIGINT在全部整型中取值范围最大，而 且需要的存储空间是表示范围次大的整型INT类型的两倍，因此只在确实需要时才用。对于浮点值，DOUBLE占用FLOAT的两倍空间。除非特别需要高精 度或范围极大的值，一般应使用只用一半存储代价的FLOAT型来表示数据。</p>
+<p>在定义整型列时，可以指定可选的显示尺寸M。如果这样，M应该是一个 1 到255的整数。它表示用来显示列中值的字符数。例如，MEDIUMINT(4)指定了一个具有4个字符显示宽度的MEDIUMINT列。如果定义了一个 没有明确宽度的整数列，将会自动分配给它一个缺省的宽度。缺省值为每种类型的“最长”值的长度。如果某个特定值的可打印表示需要不止M个字符，则显示完全 的值；不会将值截断以适合M个字符。</p>
+<p>对每种浮点类型，可指定一个最大的显示尺寸M 和小数位数D。M 的值应该取1 到255。D的值可为0 到3 0，但是不应大于M - 2（如果熟悉ODBC 术语，就会知道M 和D 对应于ODBC 概念的“精度”和“小数点位数”）。M和D对FLOAT和DOUBLE 都是可选的，但对于DECIMAL是必须的。在选项M 和D时，如果省略了它们，则使用缺省值。</p>
+<p>2.2字符串列类型</p>
+<p>MySQL提供了几种存放字符数据的串类型，其类型如下：</p>
+<p>类型名</p>
+<p>说明</p>
+<p>CHAR 定长字符串<br>VARCHAR 可变长字符串<br>TINYBLOB 非常小的BLOB（二进制大对象）<br>BLOB 小BLOB<br>MEDIUMBLOB 中等的BLOB<br>LONGBLOB 大BLOB<br>TINYTEXT 非常小的文本串<br>TEXT 小文本串<br>MEDIUMTEXT 中等文本串<br>LONGTEXT 大文本串<br>ENUM 枚举；列可赋予某个枚举成员<br>SET 集合；列可赋予多个集合成员<br>表4：字符串列类型<br>下表给出了MySQL 定义串值列的类型，以及每种类型的最大尺寸和存储需求。对于可变长的列类型，各行的值所占的存储量是不同的，这撒于实际存放在列中的值的长度。这个长度在表中用L 表示。</p>
+<p>类型说明</p>
+<p>最大尺寸</p>
+<p>存储需求</p>
+<p>CHAR( M) M 字节 M 字节<br>VARCHAR(M) M 字节 L + 1字节<br>TINYBLOB, TINYTEXT 28- 1字节 L + 1字节<br>BLOB, TEXT 216 - 1 字节 L + 2字节<br>MEDIUMBLOB, MEDIUMTEXT 224- 1字节 L + 3字节<br>LONGBLOB, LONGTEXT 232- 1字节 L + 4字节<br>ENUM(“value1”, “value2”, …) 65535 个成员 1 或2字节<br>SET (“value1”, “value2”, …) 64个成员 1、2、3、4 或8字节<br>表5：串列类型最大尺寸及存储需求<br>L 以外所需的额外字节为存放该值的长度所需的字节数。MySQL 通过存储值的内容及其长度来处理可变长度的值。这些额外的字节是无符号整数。请注意，可变长类型的最大长度、此类型所需的额外字节数以及占用相同字节数的 无符号整数之间的对应关系。例如，MEDIUMBLOB 值可能最多224 - 1字节长并需要3 个字节记录其结果。3 个字节的整数类型MEDIUMINT 的最大无符号值为224 - 1。这并非偶然。</p>
+<p>2.3日期时间列类型</p>
+<p>MySQL 提供了几种时间值的列类型，它们分别是： DATE、DATETIME、TIME、TIMESTAMP和YEAR。下表给出了MySQL 为定义存储日期和时间值所提供的这些类型，并给出了每种类型的合法取值范围。</p>
+<p>类型名</p>
+<p>说明</p>
+<p>DATE “YYYY-MM-DD”格式表示的日期值<br>TIME “hh:mm:ss”格式表示的时间值<br>DATETIME “YYYY-MM-DD hh:mm:ss”格式<br>TIMESTAMP “YYYYMMDDhhmmss”格式表示的时间戳值<br>YEAR “YYYY”格式的年份值<br>表6：日期时间列类型<br>类型名</p>
+<p>取值范围</p>
+<p>存储需求</p>
+<p>DATE “1000-01-01”到“9999-12-31” 3字节<br>TIME “-838:59:59”到“838:59:59” 3字节<br>DATETIME “1000-01-01 00:00:00” 到“9999-12-31 23:59:59” 8字节<br>TIMESTAMP 19700101000000 到2037 年的某个时刻 4字节<br>YEAR 1901 到2155 1字节<br>表7： 日前时间列类型的取值范围和存储需求<br>下面举个例子：</p>
+<p>这个例子创建一个student表，这个表中有name字段，字符类型列，不允许NULL（空值）。有Chinese、Maths和English三个整数类型列。还有个Birthday日期类型列。</p>
+<pre lang="mysql" line="1">CREATE TABLE student
+(
+Name varchar(20) NOT NULL，
+Chinese TINYINT(3)，
+Maths TINYINT(3)，
+English TINYINT(3)，
+Birthday DATE
+)
+</pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/05/14/e5-8f-96-e5-be-97event-ef-bc-8c-e5-85-bc-e5-ae-b9ff/" rel="prev" title="取得event，兼容FF">
+      <i class="fa fa-chevron-left"></i> 取得event，兼容FF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/03/30/e7-99-be-e5-ba-a6seo-e4-bc-98-e5-8c-96-e7-bb-8f-e9-aa-8c/" rel="next" title="百度SEO优化经验">
+      百度SEO优化经验 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">紫悦</p>
+  <div class="site-description" itemprop="description">不进则退，退一步万丈悬崖！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+        
+          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liulipeng" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liulipeng" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liu.lipeng@icloud.com" title="E-Mail → mailto:liu.lipeng@icloud.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/liulipeng01" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;liulipeng01" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="skype:liu.lipeng?call|chat" title="Skype → skype:liu.lipeng?call|chat" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Skype</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://ljh.name/" title="http:&#x2F;&#x2F;ljh.name&#x2F;" rel="noopener" target="_blank">LJH</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://pages.coding.mem/" title="https:&#x2F;&#x2F;pages.coding.mem" rel="noopener" target="_blank">Coding Pages</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">紫悦</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'a5973ad341c130516935',
+      clientSecret: '5a89f3c451f0e6fb1f7b588e608aef0ec0b46dd2',
+      repo        : '',
+      owner       : 'liulipeng',
+      admin       : ['liulipeng'],
+      id          : '830a41b94b6ec1bc2b9d6b063ce6b3d9',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
