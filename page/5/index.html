@@ -195,270 +195,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/03/17/yii2-e5-b0-8f-e8-b4-b4-e5-a3-ab-e9-9b-86-e5-90-88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/17/yii2-e5-b0-8f-e8-b4-b4-e5-a3-ab-e9-9b-86-e5-90-88/" class="post-title-link" itemprop="url">Yii2 小贴士集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-03-17 10:56:01" itemprop="dateCreated datePublished" datetime="2016-03-17T10:56:01+08:00">2016-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/Yii/" itemprop="url" rel="index"><span itemprop="name">Yii</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="表单提交失败调试代码"><a href="#表单提交失败调试代码" class="headerlink" title="表单提交失败调试代码"></a>表单提交失败调试代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo array_values($model-&gt;getFirstErrors())[0];exit;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取当前Controller-name和action-name（在控制器里面使用）"><a href="#获取当前Controller-name和action-name（在控制器里面使用）" class="headerlink" title="获取当前Controller name和action name（在控制器里面使用）"></a>获取当前Controller name和action name（在控制器里面使用）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $this-&gt;id;</span><br><span class="line">echo $this-&gt;action-&gt;id;</span><br></pre></td></tr></table></figure>
-
-<h3 id="控制器获取当前模块"><a href="#控制器获取当前模块" class="headerlink" title="控制器获取当前模块"></a>控制器获取当前模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;module-&gt;id</span><br></pre></td></tr></table></figure>
-
-<h3 id="use-yii-log-Logger"><a href="#use-yii-log-Logger" class="headerlink" title="use yii\log\Logger;"></a>use yii\log\Logger;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use yii\log\Logger;</span><br><span class="line">\Yii::getLogger()-&gt;log(&#39;User has been created&#39;, Logger::LEVEL_INFO);</span><br></pre></td></tr></table></figure>
-
-<h3 id="不生成label标签"><a href="#不生成label标签" class="headerlink" title="不生成label标签"></a>不生成label标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ActiveForm类</span><br><span class="line">$form-&gt;field($model, &#39;字段名&#39;)-&gt;passwordInput([&#39;maxlength&#39; &#x3D;&gt; true])-&gt;label(false) ?&gt;</span><br><span class="line">&#x2F;&#x2F; HTML类</span><br><span class="line">Html::activeInput($type,$model,&#39;字段名&#39;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Yii2-获取接口传过来的-JSON-数据："><a href="#Yii2-获取接口传过来的-JSON-数据：" class="headerlink" title="Yii2 获取接口传过来的 JSON 数据："></a>Yii2 获取接口传过来的 JSON 数据：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;request-&gt;rawBody;</span><br></pre></td></tr></table></figure>
-
-<h3 id="防止-SQL-和-Script-注入"><a href="#防止-SQL-和-Script-注入" class="headerlink" title="防止 SQL 和 Script 注入:"></a>防止 SQL 和 Script 注入:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use yii\helpers\Html;</span><br><span class="line">use yii\helpers\HtmlPurifier;</span><br><span class="line"></span><br><span class="line">echo Html::encode($view_hello_str) &#x2F;&#x2F;可以原样显示&lt;script&gt;&lt;&#x2F;script&gt;代码  </span><br><span class="line">echo HtmlPurifier::process($view_hello_str)  &#x2F;&#x2F;可以过滤掉&lt;script&gt;&lt;&#x2F;script&gt;代码 </span><br></pre></td></tr></table></figure>
-
-<h3 id="大于、小于条件查询"><a href="#大于、小于条件查询" class="headerlink" title="大于、小于条件查询"></a>大于、小于条件查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SELECT * FROM &#96;order&#96; WHERE &#96;subtotal&#96; &gt; 200 ORDER BY &#96;id&#96;</span><br><span class="line">$orders &#x3D; $customer-&gt;getOrders()</span><br><span class="line">    -&gt;where([&#39;&gt;&#39;, &#39;subtotal&#39;, 200])</span><br><span class="line">    -&gt;orderBy(&#39;id&#39;)</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<h3 id="搜索的时候添加条件筛选"><a href="#搜索的时候添加条件筛选" class="headerlink" title="搜索的时候添加条件筛选"></a>搜索的时候添加条件筛选</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$dataProvider &#x3D; $searchModel-&gt;search(Yii::$app-&gt;request-&gt;queryParams);</span><br><span class="line">&#x2F;&#x2F; $dataProvider-&gt;query-&gt;andWhere([&#39;pid&#39; &#x3D;&gt; 0]);</span><br><span class="line">$dataProvider-&gt;query-&gt;andWhere([&#39;&gt;&#39;, &#39;pid&#39;, 0]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="有两种方式获取查询出来的-name-为数组的集合-name1-name2-name3-："><a href="#有两种方式获取查询出来的-name-为数组的集合-name1-name2-name3-：" class="headerlink" title="有两种方式获取查询出来的 name 为数组的集合 [name1, name2, name3]："></a>有两种方式获取查询出来的 name 为数组的集合 [name1, name2, name3]：</h3><p>方式一：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return \yii\helpers\ArrayHelper::getColumn(User::find()-&gt;all(), &#39;name&#39;);</span><br></pre></td></tr></table></figure>
-
-<p>方式二：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return User::find()-&gt;select(&#39;name&#39;)-&gt;asArray()-&gt;column();</span><br></pre></td></tr></table></figure>
-
-<h3 id="打印数据"><a href="#打印数据" class="headerlink" title="打印数据"></a>打印数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 引用命名空间</span><br><span class="line">use yii\helpers\VarDumper;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用</span><br><span class="line">VarDumper::dump($var);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;  使用2  第二个参数是数组的深度  第三个参数是是否显示代码高亮（默认不显示）</span><br><span class="line">VarDumper::dump($var, 10 ,true);die;</span><br></pre></td></tr></table></figure>
-
-<h3 id="表单验证，只要需要一个参数"><a href="#表单验证，只要需要一个参数" class="headerlink" title="表单验证，只要需要一个参数"></a>表单验证，只要需要一个参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public function rules()</span><br><span class="line">&#123;</span><br><span class="line">    return [</span><br><span class="line">        [[&#39;card_id&#39;, &#39;card_code&#39;], function ($attribute, $param) &#123;&#x2F;&#x2F;至少要一个</span><br><span class="line">            if (empty($this-&gt;card_code) &amp;&amp; empty($this-&gt;card_id)) &#123;</span><br><span class="line">                $this-&gt;addError($attribute, &#39;card_id&#x2F;card_code至少要填一个&#39;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, &#39;skipOnEmpty&#39; &#x3D;&gt; false],</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="where-多个查询条件示例"><a href="#where-多个查询条件示例" class="headerlink" title="where 多个查询条件示例"></a>where 多个查询条件示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User::find()-&gt;where([&#39;and&#39;, [&#39;xxx&#39; &#x3D;&gt; 0, &#39;yyy&#39; &#x3D;&gt; 2], [&#39;&gt;&#39;, &#39;zzz&#39;, $time]]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取post数据"><a href="#获取post数据" class="headerlink" title="获取post数据"></a>获取post数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$post &#x3D; Yii::$app-&gt;request-&gt;post();</span><br><span class="line">$id &#x3D; $post[&#39;id&#39;];</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找-auth-times-表-type-1-并且-不存在-auth-item-表里面的数据"><a href="#查找-auth-times-表-type-1-并且-不存在-auth-item-表里面的数据" class="headerlink" title="查找 auth_times 表 type=1 并且 不存在 auth_item 表里面的数据"></a>查找 auth_times 表 type=1 并且 不存在 auth_item 表里面的数据</h3><p>查找 <code>auth_times</code> 表 <code>type=1</code> 并且 不存在 <code>auth_item</code> 表里面的数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; AuthItem.php 关键是 onCondition 方法</span><br><span class="line">public function getAuthTimes()</span><br><span class="line">&#123;</span><br><span class="line">    return $this-&gt;hasOne(AuthTimes::className(), [&#39;name&#39; &#x3D;&gt; &#39;name&#39;, ])-&gt;onCondition([AuthTimes::tableName() . &#39;.type&#39; &#x3D;&gt; 1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; AuthTimes.php 文件</span><br><span class="line">&#x2F;&#x2F; ......</span><br><span class="line">AuthItem::find()-&gt;joinWith(&#39;authTimes&#39;)-&gt;where([self::tableName() . &#39;.name&#39; &#x3D;&gt; null])-&gt;all();</span><br></pre></td></tr></table></figure>
-
-<p>生成SQL:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#96;auth_item&#96;.* FROM &#96;auth_item&#96; LEFT JOIN &#96;auth_times&#96; ON &#96;auth_item&#96;.&#96;name&#96; &#x3D; &#96;auth_times&#96;.&#96;name&#96; AND &#96;auth_times&#96;.&#96;type&#96; &#x3D; 1 WHERE &#96;auth_times&#96;.&#96;name&#96; IS NULL</span><br></pre></td></tr></table></figure>
-
-<h3 id="SQL-is-not-null条件查询"><a href="#SQL-is-not-null条件查询" class="headerlink" title="SQL is not null条件查询"></a>SQL is not null条件查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; [&#39;not&#39; &#x3D;&gt; [&#39;attribute&#39; &#x3D;&gt; null]]</span><br><span class="line"></span><br><span class="line">$query &#x3D; new Query;             </span><br><span class="line">$query-&gt;select(&#39;ID, City,State,StudentName&#39;)</span><br><span class="line">      -&gt;from(&#39;student&#39;)                               </span><br><span class="line">      -&gt;where([&#39;IsActive&#39; &#x3D;&gt; 1])</span><br><span class="line">      -&gt;andWhere([&#39;not&#39;, [&#39;City&#39; &#x3D;&gt; null]])</span><br><span class="line">      -&gt;andWhere([&#39;not&#39;, [&#39;State&#39; &#x3D;&gt; null]])</span><br><span class="line">      -&gt;orderBy([&#39;rand()&#39; &#x3D;&gt; SORT_DESC])</span><br><span class="line">      -&gt;limit(10);</span><br></pre></td></tr></table></figure>
-
-<h3 id="校验-point-template-id-在-PointTemplate-是否存在"><a href="#校验-point-template-id-在-PointTemplate-是否存在" class="headerlink" title="校验 point_template_id 在 PointTemplate 是否存在"></a>校验 point_template_id 在 PointTemplate 是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public function rules()</span><br><span class="line">&#123;</span><br><span class="line">    return [</span><br><span class="line">        ...</span><br><span class="line">        [[&#39;point_template_id&#39;], &#39;exist&#39;,</span><br><span class="line">            &#39;targetClass&#39; &#x3D;&gt; PointTemplate::className(),</span><br><span class="line">            &#39;targetAttribute&#39; &#x3D;&gt; &#39;id&#39;,</span><br><span class="line">            &#39;message&#39; &#x3D;&gt; &#39;此&#123;attribute&#125;不存在。&#39;</span><br><span class="line">        ],</span><br><span class="line">        ...</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Yii给必填项加星"><a href="#Yii给必填项加星" class="headerlink" title="Yii给必填项加星"></a>Yii给必填项加星</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div.required label:after &#123;</span><br><span class="line">    content: &quot; *&quot;;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="view里面获取当前action"><a href="#view里面获取当前action" class="headerlink" title="view里面获取当前action"></a>view里面获取当前action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump(Yii::$app-&gt;controller-&gt;action-&gt;id);</span><br></pre></td></tr></table></figure>
-
-<h3 id="关于事务"><a href="#关于事务" class="headerlink" title="关于事务"></a>关于事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;db-&gt;transaction(function() &#123;</span><br><span class="line">    $order &#x3D; new Order($customer);</span><br><span class="line">    $order-&gt;save();</span><br><span class="line">    $order-&gt;addItems($items);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 这相当于下列冗长的代码：</span><br><span class="line"></span><br><span class="line">$transaction &#x3D; Yii::$app-&gt;db-&gt;beginTransaction();</span><br><span class="line">try &#123;</span><br><span class="line">    $order &#x3D; new Order($customer);</span><br><span class="line">    $order-&gt;save();</span><br><span class="line">    $order-&gt;addItems($items);</span><br><span class="line">    $transaction-&gt;commit();</span><br><span class="line">&#125; catch (\Exception $e) &#123;</span><br><span class="line">    $transaction-&gt;rollBack();</span><br><span class="line">    throw $e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="restful-获取-GET-和-POST-过来的数据（得到结果是数组）"><a href="#restful-获取-GET-和-POST-过来的数据（得到结果是数组）" class="headerlink" title="restful 获取 GET 和 POST 过来的数据（得到结果是数组）"></a>restful 获取 GET 和 POST 过来的数据（得到结果是数组）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; post</span><br><span class="line">Yii::$app-&gt;request-&gt;bodyParams</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; get</span><br><span class="line">Yii::$app-&gt;request-&gt;queryParams;</span><br></pre></td></tr></table></figure>
-
-<h3 id="获取GET数据"><a href="#获取GET数据" class="headerlink" title="获取GET数据"></a>获取GET数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$server_id &#x3D; Yii::$app-&gt;getRequest()-&gt;get(&#39;server_id&#39;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="查询的时候-where-的-OR-和-AND-一起用"><a href="#查询的时候-where-的-OR-和-AND-一起用" class="headerlink" title="查询的时候 where 的 OR 和 AND 一起用"></a>查询的时候 where 的 OR 和 AND 一起用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Topic::updateAll(</span><br><span class="line">    [&#39;last_comment_time&#39; &#x3D;&gt; new Expression(&#39;created_at&#39;)],</span><br><span class="line">&#x2F;&#x2F;  [&#39;or&#39;, [&#39;type&#39; &#x3D;&gt; Topic::TYPE, &#39;last_comment_username&#39; &#x3D;&gt; &#39;&#39;], [&#39;type&#39; &#x3D;&gt; Topic::TYPE, &#39;last_comment_username&#39; &#x3D;&gt; null]]</span><br><span class="line">    [&#39;and&#39;, [&#39;type&#39; &#x3D;&gt; Topic::TYPE], [&#39;or&#39;, [&#39;last_comment_username&#39; &#x3D;&gt; &#39;&#39;], [&#39;last_comment_username&#39; &#x3D;&gt; null]]]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>###　嵌套查询，groupBy 分组之后排序功能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$subQuery &#x3D; new Query();</span><br><span class="line">$subQuery-&gt;from(PostComment::tableName())-&gt;where([&#39;status&#39; &#x3D;&gt; PostComment::STATUS_ACTIVE])-&gt;orderBy([&#39;created_at&#39; &#x3D;&gt; SORT_DESC]);</span><br><span class="line">$comment &#x3D; PostComment::find()-&gt;from([&#39;tmpA&#39; &#x3D;&gt; $subQuery])</span><br><span class="line">    -&gt;groupBy(&#39;post_id&#39;)</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<p>生成的语句是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM (SELECT * FROM &#96;post_comment&#96; WHERE &#96;status&#96;&#x3D;1 ORDER BY &#96;created_at&#96; DESC) &#96;tmpA&#96; GROUP BY &#96;post_id&#96;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Model-获取当前-module-id"><a href="#Model-获取当前-module-id" class="headerlink" title="Model 获取当前 module id"></a>Model 获取当前 module id</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;controller-&gt;module-&gt;id</span><br></pre></td></tr></table></figure>
-
-<h3 id="一个控制器调用其他控制器action的方法"><a href="#一个控制器调用其他控制器action的方法" class="headerlink" title="一个控制器调用其他控制器action的方法"></a>一个控制器调用其他控制器action的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;runAction(&#39;new_controller&#x2F;new_action&#39;, $params);</span><br><span class="line">&#x2F;&#x2F; 或者</span><br><span class="line">return (new SecondController(&#39;second&#39;, Yii::$app-&gt;module))-&gt;runAction(&#39;index&#39;, $data);</span><br></pre></td></tr></table></figure>
-
-<h3 id="IP-白名单"><a href="#IP-白名单" class="headerlink" title="IP 白名单"></a>IP 白名单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$config[&#39;modules&#39;][&#39;debug&#39;] &#x3D; [</span><br><span class="line">    &#39;class&#39; &#x3D;&gt; &#39;yii\debug\Module&#39;,</span><br><span class="line">    &#39;allowedIPs&#39; &#x3D;&gt; [&#39;127.0.0.1&#39;, &#39;::1&#39;, &#39;192.168.0.*&#39;, &#39;192.168.33.1&#39;],</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<h3 id="点击下载文件-action"><a href="#点击下载文件-action" class="headerlink" title="点击下载文件 action"></a>点击下载文件 action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public function actionDownload($id)</span><br><span class="line">&#123;</span><br><span class="line">    $model &#x3D; $this-&gt;findModel($id);</span><br><span class="line"></span><br><span class="line">    if ($model) &#123;</span><br><span class="line">        &#x2F;&#x2F; do something</span><br><span class="line">    &#125;</span><br><span class="line">    return \Yii::$app-&gt;response-&gt;setDownloadHeaders($model-&gt;downurl);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="发送邮件-config-config-php中的components配置"><a href="#发送邮件-config-config-php中的components配置" class="headerlink" title="发送邮件 config/config.php中的components配置"></a>发送邮件 config/config.php中的components配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#39;mailer&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;class&#39; &#x3D;&gt; &#39;yii\swiftmailer\Mailer&#39;,</span><br><span class="line">    &#39;useFileTransport&#39; &#x3D;&gt; false,</span><br><span class="line">    &#39;transport&#39; &#x3D;&gt; [</span><br><span class="line">        &#39;class&#39; &#x3D;&gt; &#39;Swift_SmtpTransport&#39;,</span><br><span class="line">        &#39;host&#39; &#x3D;&gt; &#39;smtp.gmail.com&#39;,</span><br><span class="line">        &#39;username&#39; &#x3D;&gt; &#39;admin@gmail.com&#39;,</span><br><span class="line">        &#39;password&#39; &#x3D;&gt; &#39;password12345678&#39;,</span><br><span class="line">        &#39;port&#39; &#x3D;&gt; 587,&#x2F;&#x2F;or 25&#x2F;587</span><br><span class="line">        &#39;encryption&#39; &#x3D;&gt; &#39;tls&#39;,&#x2F;&#x2F;tls or ssl</span><br><span class="line">    ]</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
-
-<p>使用 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;mailer-&gt;compose()</span><br><span class="line">                    -&gt;setFrom([&#39;admin@gmail.com&#39; &#x3D;&gt; Yii::$app-&gt;name])</span><br><span class="line">                    -&gt;setTo(&#39;admin@gmail.com&#39;)</span><br><span class="line">                    -&gt;setSubject(&#39;test subject&#39;)</span><br><span class="line">                    -&gt;setTextBody(&#39;test body&#39;)</span><br><span class="line">                    -&gt;send();</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改登陆状态超时时间（到期后自动退出登陆）-config-web-php中的components"><a href="#修改登陆状态超时时间（到期后自动退出登陆）-config-web-php中的components" class="headerlink" title="修改登陆状态超时时间（到期后自动退出登陆） config/web.php中的components"></a>修改登陆状态超时时间（到期后自动退出登陆） config/web.php中的components</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#39;user&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;class&#39;&#x3D;&gt;&#39;yii\web\User&#39;,</span><br><span class="line">    &#39;identityClass&#39; &#x3D;&gt; &#39;common\models\User&#39;,</span><br><span class="line">    &#39;loginUrl&#39;&#x3D;&gt;[&#39;&#x2F;user&#x2F;sign-in&#x2F;login&#39;],</span><br><span class="line">    &#39;authTimeout&#39; &#x3D;&gt; 1800,&#x2F;&#x2F;登陆有效时间</span><br><span class="line">    &#39;as afterLogin&#39; &#x3D;&gt; &#39;common\behaviors\LoginTimestampBehavior&#39;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改返回的数据格式（详见Response-FORMAT-XXXX）"><a href="#修改返回的数据格式（详见Response-FORMAT-XXXX）" class="headerlink" title="修改返回的数据格式（详见Response::FORMAT_XXXX）"></a>修改返回的数据格式（详见Response::FORMAT_XXXX）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$result &#x3D; array(&#39;code&#39; &#x3D;&gt; $code, &#39;msg&#39; &#x3D;&gt; $msg, &#39;data&#39; &#x3D;&gt; $data);</span><br><span class="line">$callback &#x3D; Yii::$app-&gt;request-&gt;get(&#39;callback&#39;,null);</span><br><span class="line"></span><br><span class="line">$format &#x3D; $callback ? Response::FORMAT_JSONP : Response::FORMAT_JSON;</span><br><span class="line">Yii::$app-&gt;response-&gt;format &#x3D; $format;</span><br><span class="line"></span><br><span class="line">if($callback)&#123;</span><br><span class="line">    return array(</span><br><span class="line">	&#39;callback&#39; &#x3D;&gt; $callback,</span><br><span class="line">	&#39;data&#39; &#x3D;&gt; $result</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">return $result;</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行SQL查询并缓存结果"><a href="#执行SQL查询并缓存结果" class="headerlink" title="执行SQL查询并缓存结果"></a>执行SQL查询并缓存结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$styleId &#x3D; Yii::$app-&gt;request-&gt;get(&#39;style&#39;);</span><br><span class="line">$collection &#x3D; Yii::$app-&gt;db-&gt;cache(function($db) use($styleId)&#123;</span><br><span class="line">    return Collection::findOne([&#39;style_id&#39;&#x3D;&gt;$styleId]);</span><br><span class="line">&#125;, self::SECONDS_IN_MINITUE * 10);</span><br></pre></td></tr></table></figure>
-
-<h3 id="用户头像加域名"><a href="#用户头像加域名" class="headerlink" title="用户头像加域名"></a>用户头像加域名</h3><p>场景: 数据库有<code>user </code>表有个<code>avatar_path </code>字段用来保存用户头像路径</p>
-<p>需求: 头像url需要通过域名<code>http://b.com/</code>作为基本url</p>
-<p>目标: 提高代码复用</p>
-<p>此处<code>http://b.com/</code>可以做成一个配置<br>示例:</p>
-<p><code>User.php</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class User extends \yii\db\ActiveRecord</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    public function extraFields()</span><br><span class="line">    &#123;</span><br><span class="line">        $fields &#x3D; parent::extraFields();</span><br><span class="line">        </span><br><span class="line">        $fields[&#39;avatar_url&#39;] &#x3D; function () &#123;</span><br><span class="line">            return empty($this-&gt;avatar_path) ? &#39;可以设置一个默认的头像地址&#39; : &#39;http:&#x2F;&#x2F;b.com&#x2F;&#39; . $this-&gt;avatar_path;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return $fields;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ExampleController.php</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class ExampleController extends \yii\web\Controller</span><br><span class="line">&#123;</span><br><span class="line">    public function actionIndex()</span><br><span class="line">    &#123;</span><br><span class="line">        $userModel &#x3D; User::find()-&gt;one();</span><br><span class="line">        $userData &#x3D; $userModel-&gt;toArray([], [&#39;avatar_url&#39;]);</span><br><span class="line">        </span><br><span class="line">        echo $userData[&#39;avatar_url&#39;]; &#x2F;&#x2F; 输出内容: http:&#x2F;&#x2F;b.com&#x2F;头像路径</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="避免select里面的子查询被识别成字段"><a href="#避免select里面的子查询被识别成字段" class="headerlink" title="避免select里面的子查询被识别成字段"></a>避免select里面的子查询被识别成字段</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;避免select里面的子查询被识别成字段</span><br><span class="line">$quert &#x3D; User::find()</span><br><span class="line">    -&gt;select([</span><br><span class="line">          new Expression(&#39;count(*) as count , count(distinct mobile) as mnumber&#39;)</span><br><span class="line">     ])-&gt;asArray()</span><br><span class="line">    -&gt;all();</span><br></pre></td></tr></table></figure>
-
-<h3 id="like-查询"><a href="#like-查询" class="headerlink" title="like 查询"></a>like 查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$query &#x3D; User::find()</span><br><span class="line">    -&gt;where([&#39;LIKE&#39;, &#39;name&#39;, $id.&#39;%&#39;, false]);</span><br></pre></td></tr></table></figure>
-
-<p>来源：<a target="_blank" rel="noopener" href="http://www.getyii.com/topic/47">http://www.getyii.com/topic/47</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/03/16/yii2-0-e6-95-b0-e6-8d-ae-e5-ba-93-e6-9f-a5-e8-af-a2-e5-ae-9e-e4-be-8b-ef-bc-88-e4-b8-89-ef-bc-89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/16/yii2-0-e6-95-b0-e6-8d-ae-e5-ba-93-e6-9f-a5-e8-af-a2-e5-ae-9e-e4-be-8b-ef-bc-88-e4-b8-89-ef-bc-89/" class="post-title-link" itemprop="url">Yii2.0数据库查询实例（三）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-03-16 14:34:28" itemprop="dateCreated datePublished" datetime="2016-03-16T14:34:28+08:00">2016-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/Yii/" itemprop="url" rel="index"><span itemprop="name">Yii</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>上一篇：</strong><a href="/2016/03/16/yii2-0-e6-95-b0-e6-8d-ae-e5-ba-93-e6-9f-a5-e8-af-a2-e5-ba-94-e7-94-a8-e5-ae-9e-e4-be-8b-ef-bc-88-e4-ba-8c-ef-bc-89/">Yii2.0数据库查询实例（二）</a></p>
-<h3 id="常用查询"><a href="#常用查询" class="headerlink" title="常用查询"></a>常用查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; WHERE admin_id &gt;&#x3D; 10 LIMIT 0,10</span><br><span class="line">User::find()-&gt;select(&#39;*&#39;)-&gt;where([&#39;&gt;&#x3D;&#39;, &#39;admin_id&#39;, 10])-&gt;offset(0)-&gt;limit(10)-&gt;all()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SELECT &#96;id&#96;, (SELECT COUNT(*) FROM &#96;user&#96;) AS &#96;count&#96; FROM &#96;post&#96;   </span><br><span class="line">$subQuery &#x3D; (new Query())-&gt;select(&#39;COUNT(*)&#39;)-&gt;from(&#39;user&#39;);    </span><br><span class="line">$query &#x3D; (new Query())-&gt;select([&#39;id&#39;, &#39;count&#39; &#x3D;&gt; $subQuery])-&gt;from(&#39;post&#39;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SELECT DISTINCT &#96;user_id&#96; ... </span><br><span class="line">User::find()-&gt;select(&#39;user_id&#39;)-&gt;distinct();</span><br></pre></td></tr></table></figure>
-
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;update();</span><br><span class="line">&#x2F;&#x2F;runValidation boolen 是否通过validate()校验字段 默认为true </span><br><span class="line">&#x2F;&#x2F;attributeNames array 需要更新的字段 </span><br><span class="line">$model-&gt;update($runValidation , $attributeNames);  </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;updateAll();</span><br><span class="line">&#x2F;&#x2F;update customer set status &#x3D; 1 where status &#x3D; 2</span><br><span class="line">Customer::updateAll([&#39;status&#39; &#x3D;&gt; 1], &#39;status &#x3D; 2&#39;); </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;update customer set status &#x3D; 1 where status &#x3D; 2 and uid &#x3D; 1;</span><br><span class="line">Customer::updateAll([&#39;status&#39; &#x3D;&gt; 1], [&#39;status&#39;&#x3D;&gt; &#39;2&#39;,&#39;uid&#39;&#x3D;&gt;&#39;1&#39;]);</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$model &#x3D; Customer::findOne($id);</span><br><span class="line">$model-&gt;delete();</span><br><span class="line"></span><br><span class="line">$model-&gt;deleteAll([&#39;id&#39;&#x3D;&gt;1]);</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Yii::$app-&gt;db-&gt;createCommand()-&gt;batchInsert(UserModel::tableName(), [&#39;user_id&#39;,&#39;username&#39;], [</span><br><span class="line">    [&#39;1&#39;,&#39;test1&#39;],</span><br><span class="line">    [&#39;2&#39;,&#39;test2&#39;],</span><br><span class="line">    [&#39;3&#39;,&#39;test3&#39;],   </span><br><span class="line">])-&gt;execute();</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看执行sql"><a href="#查看执行sql" class="headerlink" title="查看执行sql"></a>查看执行sql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;UserModel </span><br><span class="line">$query &#x3D; UserModel::find()-&gt;where([&#39;status&#39;&#x3D;&gt;1]); </span><br><span class="line">echo $query-&gt;createCommand()-&gt;getRawSql();</span><br></pre></td></tr></table></figure>
-
-<p>来源：<a target="_blank" rel="noopener" href="http://www.yii-china.com/post/detail/24.html">http://www.yii-china.com/post/detail/24.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/03/16/yii2-0-e6-95-b0-e6-8d-ae-e5-ba-93-e6-9f-a5-e8-af-a2-e5-ba-94-e7-94-a8-e5-ae-9e-e4-be-8b-ef-bc-88-e4-ba-8c-ef-bc-89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1224,6 +960,184 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/e4-bb-8e-e9-9b-b6-e5-bc-80-e5-a7-8b-e5-ad-a6-e4-b9-a0jquery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/05/14/e4-bb-8e-e9-9b-b6-e5-bc-80-e5-a7-8b-e5-ad-a6-e4-b9-a0jquery/" class="post-title-link" itemprop="url">从零开始学习jQuery</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-05-14 10:22:18" itemprop="dateCreated datePublished" datetime="2015-05-14T10:22:18+08:00">2015-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/04/30/jQuery-Learn-1.html">(一) 开天辟地入门篇</a><br><img src="http://www.liulipeng.com.cn/content/uploadfile/201404/87f71396491505.png">本系列文章将带您进入jQuery的精彩世界，其中有很多作者具体的使用经验和解决方案，即使你会使用jQuery也能在阅读中发现些许秘籍。本篇文章是入门第一篇，主要是简单介绍jQuery，通过简单示例指导大家如何编写jQuery代码以及搭建开发环境，详细讲解了如何在Visual Studio中配合使用jQuery。</p>
+<p><span id="more-447"></span><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/03/jQuery-Learn-2.html">(二) 万能的选择器</a></p>
+<p>本章讲解jQuery最重要的选择器部分的知识。有了jQuery的选择器我们几乎可以获取页面上任意的一个或一组对象， 可以明显减轻开发人员的工作量。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/04/jQuery-Learn-3.html">(三) 管理jQuery包装集</a></p>
+<p>在使用jQuery选择器获取到jQuery包装集后， 我们需要对其进行操作。本章首先讲解如何动态的创建元素， 接着学习如何管理jQuery包装集， 比如添加，删除，切片等。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/05/jQuery-Learn-4.html">(四) 使用jQuery操作元素的属性与样式</a></p>
+<p>本篇文章讲解如何使用jQuery获取和操作元素的属性和CSS样式，其中DOM属性和元素属性的区分值得大家学习。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/06/jQuery-Learn-5.html">(五) 事件与事件对象</a></p>
+<p>事件是脚本编程的灵魂，所以本章内容也是jQuery学习的重点。本文将对jQuery中的事件处理以及事件对象进行详细的讲解。新鲜出炉， 走过路过不能错过！</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/08/jQuery-Learn-6.html">(六) AJAX快餐</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。本篇文章讲解如何使用jQuery方便快捷的实现Ajax功能，统一所有开发人员使用Ajax的方式。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/11/jQuery-Learn-7.html">(七) jQuery动画-让页面动起来!</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。开发人员一直痛疼做动画，但是有了jQuery你会瞬间成为别人(那些不知道jQuery的人)眼里的动画高手！本文将介绍jQuery的动画相关函数。原来做动画如此简单！</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/12/jQuery-Learn-8.html">(八) 插播:jQuery实施方案</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。本篇文章属于临时插播， 用于介绍我在本公司的jQuery实施方案。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/14/jQuery-Learn-9.html">(九) jQuery工具函数</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。我们经常要使用脚本处理各种业务逻辑， 最常见的就是数组和对象的操作。jQuery工具函数为我们操作对象和数组提供了便利条件。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/19/jQuery-Learn-10.html">(十) jQueryUI常用功能实战</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。本文是实战篇，使用jQueryUI完成制作网站的大部分常用功能。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/22/jQuery-Learn-11.html">(十一) 实战表单验证与自动完成提示插件</a></p>
+<p>本系列文章将带您进入jQuery的精彩世界， 其中有很多作者具体的使用经验和解决方案， 即使你会使用jQuery也能在阅读中发现些许秘籍。本文是介绍两个最常用的jQuery插件，分别用于表单验证和自动完成提示(类似google suggest)。</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangziqiu/archive/2009/05/26/jQuery-Learn-javascript.html">(剧场版) 你必须知道的javascript</a></p>
+<p>本文是jQuery系列教程的剧场版， 即和jQuery这条主线无关， 主要介绍大家平时会忽略的一些JavaScript细节。适合希望巩固JavaScript理论知识和基础知识的开发人员阅读。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2015/05/14/jquery-e9-80-89-e6-8b-a9-e5-99-a8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/05/14/jquery-e9-80-89-e6-8b-a9-e5-99-a8/" class="post-title-link" itemprop="url">JQuery 选择器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-05-14 10:21:47" itemprop="dateCreated datePublished" datetime="2015-05-14T10:21:47+08:00">2015-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/Jquery/" itemprop="url" rel="index"><span itemprop="name">Jquery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>JQuery 选择器<br>2012-04-26 19:23<br>$() 是jQuery的一个工厂，可以把一个包含CSS选择器的字符串作为参数<br>例如：<br>$(‘.poem’) -&gt; 获取到class=”poem”的所有元素<br>$(‘#pic .title’) -&gt; 获取到id=”pic”下的所有class=”title”的元素<br>(和CSS选择器一样的方式)<br>.addClass(‘poem’)<br>在元素的class属性中加入poem，他的作用就是给元素添加CSS样式<br>与之相反的是<br>.removeClass(‘poem’)<br>$(‘.poem’).addClass(‘sized’) –&gt; &lt;div class=”poem sized”&gt;<br>所有的开始class=”poem”的元素都会添加上sized<br>$(‘div’)   –&gt; 获取页面上所有的div元素<br>JQuery选择器 CSS XPath<br>$(‘#plays &gt; li’) –&gt; id=”plays”的下一级元素中的所有li元素，仅为子元素不包括孙子元素等再下级的元素<br>$(‘#plays li’) –&gt; id=”plays”之下的所有li元素<br>$(‘#plays li:not(poem)’)   –&gt; id=”plays”之下所有class不含有poem的li元素，意思就是说将class=”poem”的li<br>元素剔除</p>
+<p>XPath选择器<br>属性选择器<br>$(‘a[@href^=”mailto”]’)   -&gt; 得到href值以mailto开头的所有a元素<br>$(‘a[@href$=”.pdf”]’) -&gt; 得到href值以.pdf结尾的所有a元素<br>$(‘a[@href*=”shzh.net”]’) -&gt; 得到href值中包含shzh.net的所有a元素<br>//属性选择器 不知道怎么的 不可以成功还会出错：例外被抛出且没有被接住<br>自定义选择器<br>$(‘div.plays:eq(1)’) -&gt; 得到class=”plays”的所有div元素的第二项，eq(0)是获取第一项<br>//这个有点类似CSS中的伪类选择符a.pic:link{}, a.pic:hover{}<br>$(‘div.nth-child(0)’) -&gt; 得到所有div元素父元素的第一个子元素</p>
+<p>在来看看另外两个选择器：基于:eq()的:odd 和 :even<br>$(‘div:odd’) -&gt; 在获取的所有div元素中获取下标是奇数的元素<br>$(‘div:even’) -&gt; 上面的相反 在获取的所有div元素中获取下标是偶数的元素</p>
+<p>$(‘#plays’).parent() -&gt; 获取id=”plays”的父节点。<br>$(‘li:not([span]):odd’) -&gt; 获取所有li 排除子元素是&lt;span&gt;的 并且 该li在集合中的下标是奇数的。<br>$(‘li:odd:not([span])’) -&gt; 获取所有li 并且下标是奇数的，子元素不是&lt;span&gt;的<br>$(‘#plays’).next() -&gt; 获取id=”plays”的下一个兄弟节点<br>$(‘#plays’).siblings() -&gt; 获取id=”plays”的所有兄弟节点<br>$(‘#plays’).find(‘td:gt(0)’) -&gt; 获取id=”plays”下的所有td元素,然后获取td下标大于0的 //find()<br>== $(‘#plays td:gt(0)’)<br>$(‘#plays’).find(‘td’) -&gt; 获取id=”plays”下的所有td元素<br>== $(‘#plays td’)<br>$(‘td:contains(“kko”)’) -&gt; 获取所有td中有文字kko的td<br>一个例子：<br>$(‘td:contains(“kko”)’).parent().find(‘td:not(:contains(“kko”))’).addClass(‘highlight’);<br>分步骤解释：<br>·首先获取所有的td中有文字kko的td $(‘td:contains(“kko”)’)<br>·获取到上一级父元素   .parent()<br>·查找子元素td中不包含文字kko的td .find(‘td:not(:contains(“kko”))’)<br>·添加class属性值highlight   .addClass(‘highlight’)</p>
+<p>.get()<br>在JQuery中的JQuery对象中获取DOM元素的方式。因为上面介绍的选择器获取到的对象并非是DOM对象而是JQuery对象<br>，JQuery对象可以看做是具有一系列自己的方法的DOM集合对象。<br>$(‘div’).get(0) -&gt; 获取到第一个div元素的DOM对象方式<br>== $(‘div’)[0]<br>$(‘div’).eq(0) -&gt; 获取到第一个div元素的JQuery对象方式</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1293,7 +1207,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -195,188 +195,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/06/mysql-lock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/06/06/mysql-lock/" class="post-title-link" itemprop="url">mysql的锁表于解锁</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-06-06 11:47:23" itemprop="dateCreated datePublished" datetime="2016-06-06T11:47:23+08:00">2016-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>锁表</p>
-<p>将mysql的数据库锁表，仅仅允许读，以保证数据的一致性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush tables with read lock;   </span><br></pre></td></tr></table></figure>
-
-<p>解锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; unlock tables;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/02/yii-validators-validator/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/06/02/yii-validators-validator/" class="post-title-link" itemprop="url">Yii 内置过滤器集合(规则)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-06-02 10:34:51" itemprop="dateCreated datePublished" datetime="2016-06-02T10:34:51+08:00">2016-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/Yii/" itemprop="url" rel="index"><span itemprop="name">Yii</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参照 <a target="_blank" rel="noopener" href="http://www.yiiframework.com/doc-2.0/yii-validators-validator.html#$builtInValidators-detail">http://www.yiiframework.com/doc-2.0/yii-validators-validator.html#$builtInValidators-detail</a></p>
-<p>验证器是所有验证程序的基类。</p>
-<p>子类应该覆盖validatevalue()和/或validateattribute()方法提供执行数据验证的实际逻辑。子类也可以覆盖clientvalidateattribute()提供客户端验证支持。<br>验证器是一套 [[builtInValidators|built-in validators] 可以参考使用短名称。它们被列为如下：</p>
-<ul>
-<li><code>boolean</code>: yii\validators\BooleanValidator</li>
-<li><code>captcha</code>: yii\captcha\CaptchaValidator</li>
-<li><code>compare</code>: yii\validators\CompareValidator</li>
-<li><code>date</code>: yii\validators\DateValidator</li>
-<li><code>default</code>: yii\validators\DefaultValueValidator</li>
-<li><code>double</code>: yii\validators\NumberValidator</li>
-<li><code>each</code>: yii\validators\EachValidator</li>
-<li><code>email</code>: yii\validators\EmailValidator</li>
-<li><code>exist</code>: yii\validators\ExistValidator</li>
-<li><code>file</code>: yii\validators\FileValidator</li>
-<li><code>filter</code>: yii\validators\FilterValidator</li>
-<li><code>image</code>: yii\validators\ImageValidator</li>
-<li><code>in</code>: yii\validators\RangeValidator</li>
-<li><code>integer</code>: yii\validators\NumberValidator</li>
-<li><code>match</code>: yii\validators\RegularExpressionValidator</li>
-<li><code>required</code>: yii\validators\RequiredValidator</li>
-<li><code>safe</code>: yii\validators\SafeValidator</li>
-<li><code>string</code>: yii\validators\StringValidator</li>
-<li><code>trim</code>: yii\validators\FilterValidator</li>
-<li><code>unique</code>: yii\validators\UniqueValidator</li>
-<li><code>url</code>: yii\validators\UrlValidator</li>
-<li><code>ip</code>: yii\validators\IpValidator</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/02/linux-command-rm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1378,6 +1196,476 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/23/Mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%92%8C%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Mysql 用户管理和权限设置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-23 19:17:17" itemprop="dateCreated datePublished" datetime="2016-05-23T19:17:17+08:00">2016-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a><strong>用户管理</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;use mysql;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a><strong>查看</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,user,password from user;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create user zx_root IDENTIFIED by &#39;xxxxx&#39;;   &#x2F;&#x2F;identified by 会将纯文本密码加密作为散列值存储</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;rename user feng to newuser; &#x2F;&#x2F;mysql 5之后可以使用，之前需要使用update 更新user表</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;drop user newuser;</span><br></pre></td></tr></table></figure>
+<p>//mysql5之前删除用户时必须先使用revoke 删除用户权限，然后删除用户，mysql5之后drop 命令可以删除用户的同时删除用户的相关权限</p>
+<h2 id="更改密码"><a href="#更改密码" class="headerlink" title="更改密码"></a>更改密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">mysql&gt; update mysql.user set password&#x3D;password(&#39;xxxx&#39;) where user&#x3D;&#39;otheruser&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看用户权限"><a href="#查看用户权限" class="headerlink" title="查看用户权限"></a>查看用户权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show grants for zx_root;</span><br></pre></td></tr></table></figure>
+
+<h2 id="赋予权限"><a href="#赋予权限" class="headerlink" title="赋予权限"></a>赋予权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select on dmc_db.*  to zx_root;</span><br></pre></td></tr></table></figure>
+
+<h2 id="回收权限"><a href="#回收权限" class="headerlink" title="回收权限"></a>回收权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; revoke select on dmc_db.* from  zx_root;  &#x2F;&#x2F;如果权限不存在会报错</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令也可使用多个权限同时赋予和回收，权限之间使用逗号分隔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant select, update, delete, insert on dmc_db.* to  zx_root;</span><br></pre></td></tr></table></figure>
+
+<p>如果想立即看到结果使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>命令更新 </p>
+<h2 id="设置权限时必须给出一下信息"><a href="#设置权限时必须给出一下信息" class="headerlink" title="设置权限时必须给出一下信息"></a><strong>设置权限时必须给出一下信息</strong></h2><ol>
+<li>要授予的权限</li>
+<li>被授予访问权限的数据库或表</li>
+<li>用户名</li>
+</ol>
+<h2 id="grant和revoke可以在几个层次上控制访问权限"><a href="#grant和revoke可以在几个层次上控制访问权限" class="headerlink" title="grant和revoke可以在几个层次上控制访问权限"></a><strong>grant和revoke可以在几个层次上控制访问权限</strong></h2><ol>
+<li>整个服务器，使用 grant ALL  和revoke  ALL</li>
+<li>整个数据库，使用on  database.*</li>
+<li>特点表，使用on  database.table</li>
+<li>特定的列</li>
+<li>特定的存储过程</li>
+</ol>
+<h2 id="user表中host列的值的意义"><a href="#user表中host列的值的意义" class="headerlink" title="user表中host列的值的意义"></a><strong>user表中host列的值的意义</strong></h2><table>
+<thead>
+<tr>
+<th>Host</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>匹配所有主机</td>
+</tr>
+<tr>
+<td>localhost</td>
+<td>localhost不会被解析成IP地址，直接通过UNIXsocket连接</td>
+</tr>
+<tr>
+<td>127.0.0.1</td>
+<td>会通过TCP/IP协议连接，并且只能在本机访问;</td>
+</tr>
+<tr>
+<td>::1</td>
+<td>::1就是兼容支持ipv6的，表示同ipv4的127.0.0.1</td>
+</tr>
+</tbody></table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。"><a href="#grant-普通数据用户，查询、插入、更新、删除-数据库中所有表数据的权利。" class="headerlink" title="grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。"></a>grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant insert on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant update on testdb.* to common_user@&#39;%&#39;</span><br><span class="line">grant delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>或者，用一条 MySQL 命令来替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
+</blockquote>
+<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant alter on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant drop on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-外键权限。"><a href="#grant-操作-MySQL-外键权限。" class="headerlink" title="grant 操作 MySQL 外键权限。"></a>grant 操作 MySQL 外键权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant references on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-临时表权限。"><a href="#grant-操作-MySQL-临时表权限。" class="headerlink" title="grant 操作 MySQL 临时表权限。"></a>grant 操作 MySQL 临时表权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant create temporary tables on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-索引权限。"><a href="#grant-操作-MySQL-索引权限。" class="headerlink" title="grant 操作 MySQL 索引权限。"></a>grant 操作 MySQL 索引权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant index on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-视图、查看视图源代码-权限。"><a href="#grant-操作-MySQL-视图、查看视图源代码-权限。" class="headerlink" title="grant 操作 MySQL 视图、查看视图源代码 权限。"></a>grant 操作 MySQL 视图、查看视图源代码 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant create view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br><span class="line">grant show view on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-操作-MySQL-存储过程、函数-权限。"><a href="#grant-操作-MySQL-存储过程、函数-权限。" class="headerlink" title="grant 操作 MySQL 存储过程、函数 权限。"></a>grant 操作 MySQL 存储过程、函数 权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant create routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, can show procedure status</span><br><span class="line">grant alter routine on testdb.* to developer@&#39;192.168.0.%&#39;; -- now, you can drop a procedure</span><br><span class="line">grant execute on testdb.* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grant-普通-DBA-管理某个-MySQL-数据库的权限。"><a href="#grant-普通-DBA-管理某个-MySQL-数据库的权限。" class="headerlink" title="grant 普通 DBA 管理某个 MySQL 数据库的权限。"></a>grant 普通 DBA 管理某个 MySQL 数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on testdb to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<p>其中，关键字 “privileges” 可以省略。</p>
+<h3 id="grant-高级-DBA-管理-MySQL-中所有数据库的权限。"><a href="#grant-高级-DBA-管理-MySQL-中所有数据库的权限。" class="headerlink" title="grant 高级 DBA 管理 MySQL 中所有数据库的权限。"></a>grant 高级 DBA 管理 MySQL 中所有数据库的权限。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all on *.* to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-grant-权限，分别可以作用在多个层次上。"><a href="#MySQL-grant-权限，分别可以作用在多个层次上。" class="headerlink" title="MySQL grant 权限，分别可以作用在多个层次上。"></a>MySQL grant 权限，分别可以作用在多个层次上。</h3><h4 id="grant-作用在整个-MySQL-服务器上"><a href="#grant-作用在整个-MySQL-服务器上" class="headerlink" title="grant 作用在整个 MySQL 服务器上"></a>grant 作用在整个 MySQL 服务器上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant select on *.* to dba@localhost; -- dba 可以查询 MySQL 中所有数据库中的表。</span><br><span class="line">grant all on *.* to dba@localhost; -- dba 可以管理 MySQL 中的所有数据库</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在单个数据库上"><a href="#grant-作用在单个数据库上" class="headerlink" title="grant 作用在单个数据库上"></a>grant 作用在单个数据库上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select on testdb.* to dba@localhost; -- dba 可以查询 testdb 中的表。</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在单个数据表上"><a href="#grant-作用在单个数据表上" class="headerlink" title="grant 作用在单个数据表上"></a>grant 作用在单个数据表上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert, update, delete on testdb.orders to dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在表中的列上"><a href="#grant-作用在表中的列上" class="headerlink" title="grant 作用在表中的列上"></a>grant 作用在表中的列上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant select(id, se, rank) on testdb.apache_log to dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<h4 id="grant-作用在存储过程、函数上"><a href="#grant-作用在存储过程、函数上" class="headerlink" title="grant 作用在存储过程、函数上"></a>grant 作用在存储过程、函数上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant execute on procedure testdb.pr_add to &#39;dba&#39;@&#39;localhost&#39;</span><br><span class="line">grant execute on function testdb.fn_add to &#39;dba&#39;@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<h4 id="GRANT命令使用说明"><a href="#GRANT命令使用说明" class="headerlink" title="GRANT命令使用说明"></a>GRANT命令使用说明</h4><p>先来看一个例子，创建一个只允许从本地登录的超级用户feihong，并允许将权限赋予别的用户，密码为<a href="mailto:&#x74;&#x65;&#x73;&#x74;&#64;&#x66;&#101;&#x69;&#104;&#x6f;&#110;&#x67;&#46;&#49;&#49;&#49;">&#x74;&#x65;&#x73;&#x74;&#64;&#x66;&#101;&#x69;&#104;&#x6f;&#110;&#x67;&#46;&#49;&#49;&#49;</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO feihong@&#39;localhost&#39; IDENTIFIED BY &#39;test@feihong.111&#39; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<p>GRANT命令说明：</p>
+<ul>
+<li><code>ALL PRIVILEGES</code> 是表示所有权限，你也可以使用select、update等权限提到的权限。</li>
+<li><code>ON </code> 用来指定权限针对哪些库和表。</li>
+<li><code>*.*</code> 中前面的*号用来指定数据库名，后面的*号用来指定表名。</li>
+<li><code>TO</code> 表示将权限赋予某个用户。</li>
+<li><code>feihong@&#39;localhost&#39;</code> 表示feihong用户，@后面接限制的主机，可以是IP、IP段、域名以及%，%表示任何地方。注意：这里%有的版本不包括本地，以前碰到过给某个用户设置了%允许任何地方登录，但是在本地登录不了，这个和版本有关系，遇到这个问题再加一个localhost的用户就可以了。</li>
+<li><code>IDENTIFIED BY</code> 指定用户的登录密码。</li>
+<li><code>WITH GRANT OPTION</code> 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定WITH GRANT OPTION选项导致后来该用户不能使用GRANT命令创建用户或者给其他用户授权。</li>
+</ul>
+<p>备注：可以使用GRANT重复给用户添加权限，权限叠加，比如你先给用户添加了一个select权限，然后又给用户添加了一个insert权限，那么该用户就同时拥有了select和insert权限。</p>
+<p>注意：修改完权限以后 一定要刷新服务，或者重启服务，刷新服务用：<code>FLUSH PRIVILEGES</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/05/23/Linux%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4find,xargs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/23/Linux%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4find,xargs/" class="post-title-link" itemprop="url">Linux文件查找命令find,xargs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-23 17:11:32" itemprop="dateCreated datePublished" datetime="2016-05-23T17:11:32+08:00">2016-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Linux文件查找命令find-xargs"><a href="#Linux文件查找命令find-xargs" class="headerlink" title="Linux文件查找命令find,xargs"></a>Linux文件查找命令find,xargs</h2><hr>
+<h3 id="find命令的格式："><a href="#find命令的格式：" class="headerlink" title="find命令的格式："></a>find命令的格式：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find pathname -options [-<span class="built_in">print</span> -<span class="built_in">exec</span> -ok ...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="find-命令的参数："><a href="#find-命令的参数：" class="headerlink" title="find 命令的参数："></a>find 命令的参数：</h3><p><strong>-perm</strong></p>
+<p>按照文件权限模式查找</p>
+<p>读权限：r:4 写权限：w:2 执行权限：x:1</p>
+<p>文件属主具有读、写权限： rw：4+2=6</p>
+<p>其他用户具有读权限：r:4</p>
+<p><strong>-type</strong></p>
+<p>查找的文件类型</p>
+<p>-type f 文件</p>
+<p>-type d 目录</p>
+<p>-type l 符号链接文件</p>
+<p><strong>-exec</strong></p>
+<p>-exec 参数后面跟的是 command命令</p>
+<p>command命令的终止，使用 ‘;’ (分号）来判定，在后面必须有一个 ‘;’</p>
+<p>‘{}’，使用{}来表示文件名，也就是find前面处理过程中过滤出来的文件，用于command命令进行处理</p>
+<p>对于不同的系统，直接使用分号可能会有不同的意义， 使用转义符 ‘&#39;在分号前明确说明</p>
+<p><strong>xargs</strong></p>
+<blockquote>
+<p>find命令把匹配到的文件传递给xargs命令，而xargs命令每次只获取一部分文件而不是全部，不像-exec选项那样。这样它可以先处理最先获取的一部分文件，然后是下一批，并如此继续下去。</p>
+</blockquote>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><hr>
+<h3 id="sed简介："><a href="#sed简介：" class="headerlink" title="sed简介："></a>sed简介：</h3><blockquote>
+<p>sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
+</blockquote>
+<blockquote>
+<p>sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件名。Sed对于脚本中输入的命令非常挑剔，在命令的末尾不能有任何空白或文本，如果在一行中有多个命令，要用分号分隔。以#开头的行为注释行，且不能跨行。</p>
+</blockquote>
+<h3 id="关于sed的hold-space（内存缓冲区）和pattern-space-模式空间"><a href="#关于sed的hold-space（内存缓冲区）和pattern-space-模式空间" class="headerlink" title="关于sed的hold space（内存缓冲区）和pattern space(模式空间)"></a>关于sed的hold space（内存缓冲区）和pattern space(模式空间)</h3><blockquote>
+<p>sed在处理文件的时候，每一行都需要存放在一个叫“模式空间”的临时缓存区。每处理完一行，便清理一次(pattern space)，并把下一行再次放入该临时缓冲区。</p>
+</blockquote>
+<blockquote>
+<p>而保留空间(hole space),是当sed用到h命令的时候，把匹配的模式放在一个叫做”hold buffer”的保留缓冲里，但需要使用G(sed的取得命令）的时候，sed 从这个保留空间(hold space)中取得。</p>
+</blockquote>
+<blockquote>
+<p>sed 是以行为单位进行读取,读取后的内容存放在pattern space。</p>
+</blockquote>
+<blockquote>
+<p>holding space是通过h,H,x,g,G命令和pattern space产生关连,利用这5个特性可以辅助pattern space解决问题。</p>
+</blockquote>
+<p><strong>g</strong></p>
+<p>表示行内全面替换,当前处理行进行全局替换。</p>
+<p><strong>G</strong></p>
+<p>获得内存缓冲区的内容，并追加到当前模板块文本的后面。<br>函数参数G 与g 唯一差别是, sed执行g 时, 数据盖掉(overwrite) pattern space 内原来的数据<br>而G , 数据则是”添加(append)” 在pattern space 原来数据后。</p>
+<p><strong>‘;’号</strong></p>
+<p>如果在一行中有多个命令，要用分号隔开。</p>
+<p><strong>s/re/string</strong></p>
+<p>用string替换正则表达式re。</p>
+<p><strong>d</strong></p>
+<p>从模板块（Pattern space）位置删除行。</p>
+<p>函数参数d 表示删除数据行, 其指令格式如下:</p>
+<p>[address1[ ,address2]] d</p>
+<p>对上述格式有下面几点说明:</p>
+<p>函数参数d 最多与两个地址参数配合。</p>
+<p>sed执行删除动作情况如下:</p>
+<p>将pattern space 内符合地址参数的数据删除。</p>
+<p>将下一笔资料读进pattern space 。</p>
+<p>重新执行sedscript。</p>
+<p><strong>n</strong></p>
+<p>读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。</p>
+<p>函数参数n 表示读入下一行资料。</p>
+<p>其指令格式如下:</p>
+<p>[address1[ ,address2]] n</p>
+<p>对上述格式有下面几点说明:</p>
+<p>函数参数n 最多配合两个地址参数。</p>
+<p>sed执行读入下一行动作的情况如下:</p>
+<p>输出在pattern space 的数据。</p>
+<p>将下一笔资料读到pattern space。</p>
+<p>执行下一个编辑指令。</p>
+<p><strong>-n, –quiet, –silent</strong></p>
+<p>安静模式，取消默认输出。</p>
+<p><strong>x</strong></p>
+<p>交换pattern和hold space</p>
+<p><strong>p</strong></p>
+<p>打印模式空间的行，通常 p 会与参数 sed -n 一起使用</p>
+<p><strong>N</strong></p>
+<p>追加下一行数据到模式空间，数据行间以换行字符(embedded newline character)分隔。</p>
+<p>函数参数N 表示添加下一笔资料在pattern space 内。</p>
+<p>其指令格式如下:</p>
+<p>[address1 ,[address2]] N</p>
+<p>对上述格式有下面几点说明:</p>
+<p>函数参数N 最多配合两个地址参数。</p>
+<p>sed执行时, 将下一行数据读入并添加在pattern space 内, 数据行间以换行字符(embedded newline character)分隔。</p>
+<p>此外, 在替换时, 换行字符可用\n 来match。</p>
+<p><strong>=</strong></p>
+<p>打印当前行号</p>
+<p><strong>.</strong></p>
+<p>匹配一个非换行符的字符</p>
+<p>h</p>
+<p>拷贝模板块的内容到内存中的缓冲区。</p>
+<p><strong>!</strong></p>
+<p>表示后面的命令对所有没有被选定的行发生作用。</p>
+<p><strong>$</strong></p>
+<p>锚定行的结束 如：/sed$/匹配所有以sed结尾的行。也可以表示文件最后一行。</p>
+<p><strong>1</strong></p>
+<p>表示文件第一行</p>
+<p><strong>-e</strong></p>
+<p>直接在指令列模式上进行 sed 的动作编辑，允许多台编辑。</p>
+<p><strong>:label</strong></p>
+<p>表示建立一个标签label</p>
+<p><strong>b</strong></p>
+<p>跳转命令，这个命令是无条件跳转</p>
+<p>ba表示跳转到标签a处</p>
+<p><strong>q</strong></p>
+<p>退出Sed。</p>
+<p><strong>D</strong></p>
+<p>删除模板块的第一行。</p>
+<p>函数参数D 与d 的比较如下:</p>
+<p>当pattern space 内只有一数据行时, D 与d 作用相同。</p>
+<p>当pattern space 内有多行资料行时D 表示只删除pattern space 内第一行资料; d 则全删除。</p>
+<p>D 表示执行删除后, pattern space 内不添加下一笔数据, 而将剩下的数据重新执行sedscript ; d 则读入下一行后执行sedscript。</p>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><hr>
+<h3 id="grep简介："><a href="#grep简介：" class="headerlink" title="grep简介："></a>grep简介：</h3><blockquote>
+<p>grep (global search regular expression(RE) and print out the line,全面搜索正则表达式并把行打印出来)是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。Unix的grep家族包括grep、 egrep和fgrep。egrep和fgrep的命令只跟grep有很小不同。egrep是grep的扩展，支持更多的re元字符， fgrep就是 fixed grep或fast grep，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示回其自身的字面意义，不再特殊。linux 使用GNU版本的grep。它功能更强，可以通过-G、-E、-F命令行选项来使用egrep和fgrep的功能。</p>
+</blockquote>
+<p><strong>-l</strong></p>
+<p>打印匹配模板的文件清单</p>
+<p><strong>-r</strong></p>
+<p>递归地搜索目录。在缺省情况下，按照到目录的链接。</p>
+<p><strong>^</strong></p>
+<p>锚定行的开始</p>
+<p><strong>[^]</strong></p>
+<p>匹配一个不在指定范围内的字符</p>
+<p><strong>\w</strong></p>
+<p>匹配文字和数字字符，也就是[A-Za-z0-9]</p>
+<p><strong>x{m,}</strong></p>
+<p>重复字符x,至少m次，如：’o{5,}‘匹配至少有5个o的行。</p>
+<p>‘\w{3,}‘即是至少有4个字符的已登录用户</p>
+<p><strong>$</strong></p>
+<p>锚定行的结束 如：/sed$/匹配所有以sed结尾的行。</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><hr>
+<h3 id="关于awk"><a href="#关于awk" class="headerlink" title="关于awk:"></a>关于awk:</h3><blockquote>
+<p>awk是一种用于处理文本的编程语言工具。AWK 实用工具的语言在很多方面类似于 shell 编程语言，尽管 AWK 具有完全属于其本身的语法。在最初创造 AWK 时，其目的是用于文本处理，并且这种语言的基础是，只要在输入数据中有模式匹配，就执行一系列指令。该实用工具扫描文件中的每一行，查找与命令行中所给定 内容相匹配的模式。如果发现匹配内容，则进行下一个编程步骤。如果找不到匹配内容，则继续处理下一行。</p>
+</blockquote>
+<h3 id="awk命令的语法"><a href="#awk命令的语法" class="headerlink" title="awk命令的语法"></a>awk命令的语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123;pattern + action&#125;&#39; &#123;filenames&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号 ({}) 不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。</p>
+</blockquote>
+<h3 id="0，关于awk的字段"><a href="#0，关于awk的字段" class="headerlink" title="$0，关于awk的字段"></a>$0，关于awk的字段</h3><blockquote>
+<p>实用工具将每个输入行分为记录和字段。记录是单行的输入，而每条记录包含若干字段。默认的字段分隔符是空格或制表符，而记录的分隔符是换行。虽然在默认情况下将制表符和空格都看作字段分隔符（多个空格仍然作为一个分隔符），但是可以将分隔符从空格改为任何其它字符。</p>
+</blockquote>
+<blockquote>
+<p>当 AWK 读取输入内容时，整条记录被分配给变量 $0。每个字段以字段分隔符分开，被分配给变量 $1、$2、$3 等等。一行在本质上可以包含无数个字段，通过字段号来访问每个字段。</p>
+</blockquote>
+<h3 id="BEGIN和END"><a href="#BEGIN和END" class="headerlink" title="BEGIN和END"></a>BEGIN和END</h3><blockquote>
+<p>在awk 中两个特别的表达式，BEGIN和END，这两者都可用于pattern中，提供BEGIN和END的作用是给程序赋予初始状态和在程序结束之后执行一些扫尾的工作。任何在BEGIN之后列出的操作（在{}内）将在awk开始扫描输入之前执行，而END之后列出的操作将在扫描完全部的输入之后执行。因此，通常使用BEGIN来显示变量和预置（初始化）变量，使用END来输出最终结果。</p>
+</blockquote>
+<h3 id="gsub（r，s，t）"><a href="#gsub（r，s，t）" class="headerlink" title="gsub（r，s，t）"></a>gsub（r，s，t）</h3><blockquote>
+</blockquote>
+<p>在字符串t中用字符串s和正则表达式r匹配的所有字符串。返回值是替换的个数。如果没有给出t，默认是$0。</p>
+<p><strong>NR</strong></p>
+<p>表示awk开始执行程序后所读取的数据行数.</p>
+<p><strong>$0</strong></p>
+<p>表示当前处理的整行数据</p>
+<h2 id="Linux的cut命令"><a href="#Linux的cut命令" class="headerlink" title="Linux的cut命令"></a>Linux的cut命令</h2><hr>
+<blockquote>
+<p>cut命令可以从一个文本文件或者文本流中提取文本列，具体的说就是在文件中负责剪切数据用的。cut是以每一行为一个处理对象的，这种机制和sed是一样的。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -d&#39;分隔字元&#39; -f fields</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数∶</strong></p>
+<p>-d ∶后面接分隔字元。与 -f 一起使用；</p>
+<p>-f ∶依据 -d 的分隔字元将一段讯息分割成为数段，用 -f 取出第几段的意思；</p>
+<p>-c ∶以字元 (characters) 的单位取出固定字元区间；</p>
+<h2 id="关于WC命令："><a href="#关于WC命令：" class="headerlink" title="关于WC命令："></a>关于WC命令：</h2><hr>
+<blockquote>
+<p>该命令统计给定文件中的字节数、字数、行数。如果没有给出文件名，则从标准输入读取。wc同时也给出所有指定文件的总统计数。字是由空格字符区分开的最大字符串。</p>
+</blockquote>
+<p><strong>该命令各选项含义如下：</strong></p>
+<p>wc -m filename：显示一个文件的字符数</p>
+<p>wc -l filename：显示一个文件的行数</p>
+<p>wc -L filename：显示一个文件中的最长行的长度</p>
+<p>wc -w filename：显示一个文件的字数</p>
+<h2 id="关于ls命令"><a href="#关于ls命令" class="headerlink" title="关于ls命令"></a>关于ls命令</h2><hr>
+<blockquote>
+<p>ls 命令经常要使用，通过使用 ls 命令可以查看linux文件夹包含的文件，查看文件权限(包括目录、文件夹、文件权限)，查看目录信息等等，ls 命令在平常的linux操作中使用很频繁，所以这里介绍下 ls 命令的相关使用方法。</p>
+</blockquote>
+<p><strong>选项说明：</strong></p>
+<p>-a 用于显示所有文件和子目录(保罗点文件)。</p>
+<p>-l 除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。</p>
+<p>-r 将目录的内容清单以英文字母顺序的逆序显示。</p>
+<p>-t 按文件修改时间进行排序，而不是按文件名进行排序。</p>
+<h2 id="关于sort命令"><a href="#关于sort命令" class="headerlink" title="关于sort命令"></a>关于sort命令</h2><hr>
+<blockquote>
+<p>Sort命令的功能是对文件中的各行进行排序。Sort命令有许多非常实用的选项，这些选项最初是用来对数据库格式的文件内容进行各种排序操作的。实际上，Sort命令可以被认为是一个非常强大的数据管理工具，用来管理内容类似数据库记录的文件。</p>
+</blockquote>
+<p><strong>-n</strong><br>按照数字方式排序。不加-n参数时排序结果根据最左面的数字开始，等同于字母的比较方式。按算术值对数字字段排序。数字字段可包含前导空格、可选减号、十进制数字、千分位分隔符和可选基数符。对包含任何非数字字符的字段进行数字排序会出现无法预知的结果。</p>
+<p><strong>-r</strong> 颠倒指定排序的顺序。</p>
+<p><strong>-k</strong> 作用是根据某个列来排序，默认是第1列（从1开始）。</p>
+<p><strong>-t</strong> 表示分割符，以：分割，默认情况下以空格分割</p>
+<p><strong>-nrk 5</strong> 即是按照数字方式倒序排序，根据文件属性的第5列即是文件大小排序</p>
+<h2 id="关于tr命令"><a href="#关于tr命令" class="headerlink" title="关于tr命令"></a>关于tr命令</h2><hr>
+<blockquote>
+<p>通过使用 tr，可以非常容易地实现 sed 的许多最基本功能。可以将 tr 看作为 sed 的（极其）简化的变体。使用tr命令可以用一个字符来替换另一个字符，或者可以完全除去一些字符，也可以用它来除去重复字符。</p>
+</blockquote>
+<p><strong>tr的命令格式为：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tr -c -d -s [&quot;string1_to_translate_from&quot;] [&quot;string2_to_translate_to&quot;] &lt; input-file</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>-c</strong></p>
+<p>用字符串1中字符集的补集替换此字符集，要求字符集为ASCII。</p>
+<p><strong>-d</strong></p>
+<p>删除字符串1中所有输入字符。</p>
+<p><strong>-s</strong></p>
+<p>删除所有重复出现字符序列，只保留第一个；即将重复出现字符串压缩为一个字符串。</p>
+<p><strong>string1_to_translate_from</strong></p>
+<p>要转换的原字符串</p>
+<p><strong>string2_to_translate_to</strong></p>
+<p>想要转换成的字符串</p>
+<p>除了文章中有特别说明，均为IT宅原创文章，转载请以链接形式注明出处。</p>
+<p>本文链接：<a target="_blank" rel="noopener" href="http://www.itzhai.com/linux-sed-awk-grep-cut-find-frequently-used-commands-such-as-introduction.html">http://www.itzhai.com/linux-sed-awk-grep-cut-find-frequently-used-commands-such-as-introduction.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1447,7 +1735,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -195,243 +195,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/17/linux-command-touch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/06/17/linux-command-touch/" class="post-title-link" itemprop="url">每天一个linux命令(9)：touch 命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-06-17 15:38:57" itemprop="dateCreated datePublished" datetime="2016-06-17T15:38:57+08:00">2016-06-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目录点击这里:<a href="/2016/05/26/a-linux-command-menu-devery-day/">每天一个linux命令</a></p>
-<blockquote>
-<p>linux的touch命令不常用，一般在使用make的时候可能会用到，用来修改文件时间戳，或者新建一个不存在的文件。</p>
-</blockquote>
-<h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch [选项]... 文件...</span><br></pre></td></tr></table></figure>
-
-<h2 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h2><p><code>-a</code>   或–time=atime或–time=access或–time=use 　只更改存取时间。<br><code>-c</code>   或–no-create 　不建立任何文档。<br><code>-d</code> 　使用指定的日期时间，而非现在的时间。<br><code>-f</code> 　此参数将忽略不予处理，仅负责解决BSD版本touch指令的兼容性问题。<br><code>-m</code>   或–time=mtime或–time=modify 　只更改变动时间。<br><code>-r</code> 　把指定文档或目录的日期时间，统统设成和参考文档或目录的日期时间相同。<br><code>-t</code> 　使用指定的日期时间，而非现在的时间。</p>
-<h2 id="命令功能"><a href="#命令功能" class="headerlink" title="命令功能"></a>命令功能</h2><p>touch命令参数可更改文档或目录的日期时间，包括存取时间和更改时间。 </p>
-<h2 id="使用范例"><a href="#使用范例" class="headerlink" title="使用范例"></a>使用范例</h2><h3 id="实例一：创建不存在的文件"><a href="#实例一：创建不存在的文件" class="headerlink" title="实例一：创建不存在的文件"></a>实例一：创建不存在的文件</h3><p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch log2012.log log2013.log</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# touch log2012.log log2013.log</span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br></pre></td></tr></table></figure>
-
-<p>如果log2014.log不存在，则不创建文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# touch -c log2014.log</span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例二：更新log-log的时间和log2012-log时间戳相同"><a href="#实例二：更新log-log的时间和log2012-log时间戳相同" class="headerlink" title="实例二：更新log.log的时间和log2012.log时间戳相同"></a>实例二：更新log.log的时间和log2012.log时间戳相同</h3><p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch -r log.log log2012.log</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br><span class="line">[root@localhost test]# touch -r log.log log2012.log </span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br></pre></td></tr></table></figure>
-
-<p>实例三：设定文件的时间戳</p>
-<p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch -t 201211142234.50 log.log</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br><span class="line">[root@localhost test]# touch -t 201211142234.50 log.log</span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log2012.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 16:01 log2013.log</span><br><span class="line">-rw-r--r-- 1 root root    0 2012-11-14 log.log</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<p><code>-t</code>  time 使用指定的时间值 time 作为指定文件相应时间戳记的新值．此处的 time规定为如下形式的十进制数:     </p>
-<p>  [[CC]YY]MMDDhhmm[.SS]     </p>
-<p>  这里，CC为年数中的前两位，即”世纪数”；YY为年数的后两位，即某世纪中的年数．如果不给出CC的值，则touch   将把年数CCYY限定在1969–2068之内．MM为月数，DD为天将把年数CCYY限定在1969–2068之内．MM为月数，DD为天数，hh 为小时数(几点)，mm为分钟数，SS为秒数．此处秒的设定范围是0–61，这样可以处理闰秒．这些数字组成的时间是环境变量TZ指定的时区中的一个时 间．由于系统的限制，早于1970年1月1日的时间是错误的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/12/linux-command-cp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="紫悦">
-      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="紫悦博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/06/12/linux-command-cp/" class="post-title-link" itemprop="url">每天一个linux命令(8)：cp 命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2016-06-12 11:00:05" itemprop="dateCreated datePublished" datetime="2016-06-12T11:00:05+08:00">2016-06-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目录点击这里:<a href="/2016/05/26/a-linux-command-menu-devery-day/">每天一个linux命令</a></p>
-<blockquote>
-<p>cp命令用来复制文件或者目录，是Linux系统中最常用的命令之一。一般情况下，shell会设置一个别名，在命令行下复制文件时，如果目标文件已经存在，就会询问是否覆盖，不管你是否使用-i参数。但是如果是在shell脚本中执行cp时，没有-i参数时不会询问是否覆盖。这说明命令行和shell脚本的执行方式有些不同。 </p>
-</blockquote>
-<h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><p>用法：</p>
-<ul>
-<li>cp [选项]… [-T] 源 目的</li>
-<li>cp [选项]… 源… 目录</li>
-<li>cp [选项]… -t 目录 源…</li>
-</ul>
-<h2 id="命令功能"><a href="#命令功能" class="headerlink" title="命令功能"></a>命令功能</h2><p>将源文件复制至目标文件，或将多个源文件复制至目标目录。</p>
-<h2 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h2><ul>
-<li><code>-a</code>, –archive    等于-dR –preserve=all<br>  –backup[=CONTROL    为每个已存在的目标文件创建备份</li>
-<li><code>-b</code>                类似–backup 但不接受参数<br> –copy-contents        在递归处理是复制特殊文件内容</li>
-<li><code>-d</code>                等于–no-dereference –preserve=links</li>
-<li><code>-f</code>, –force        如果目标文件无法打开则将其移除并重试(当 -n 选项<pre><code>              存在时则不需再选此项)</code></pre>
-</li>
-<li><code>-i</code>, –interactive        覆盖前询问(使前面的 -n 选项失效)</li>
-<li><code>-H</code>                跟随源文件中的命令行符号链接</li>
-<li><code>-l</code>, –link            链接文件而不复制</li>
-<li><code>-L</code>, –dereference   总是跟随符号链接</li>
-<li><code>-n</code>, –no-clobber   不要覆盖已存在的文件(使前面的 -i 选项失效)</li>
-<li><code>-P</code>, –no-dereference   不跟随源文件中的符号链接</li>
-<li><code>-p</code>                等于–preserve=模式,所有权,时间戳<br>  –preserve[=属性列表   保持指定的属性(默认：模式,所有权,时间戳)，如果<pre><code>         可能保持附加属性：环境、链接、xattr 等</code></pre>
-</li>
-<li><code>-R</code>, <code>-r</code>, –recursive  复制目录及目录内的所有项目</li>
-</ul>
-<h2 id="命令实例"><a href="#命令实例" class="headerlink" title="命令实例"></a>命令实例</h2><h3 id="实例一：复制单个文件到目标目录，文件在目标文件中不存在"><a href="#实例一：复制单个文件到目标目录，文件在目标文件中不存在" class="headerlink" title="实例一：复制单个文件到目标目录，文件在目标文件中不存在"></a>实例一：复制单个文件到目标目录，文件在目标文件中不存在</h3><p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp log.log test5</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# cp log.log test5</span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br><span class="line">drwxr-xr-x 6 root root 4096 10-27 01:58 scf</span><br><span class="line">drwxrwxrwx 2 root root 4096 10-28 14:47 test3</span><br><span class="line">drwxr-xr-x 2 root root 4096 10-28 14:53 test5</span><br><span class="line">[root@localhost test]# cd test5</span><br><span class="line">[root@localhost test5]# ll</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-1.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-2.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-3.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:53 log.log</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<p>在没有带-a参数时，两个文件的时间是不一样的。在带了-a参数时，两个文件的时间是一致的。  </p>
-<h3 id="实例二：目标文件存在时，会询问是否覆盖"><a href="#实例二：目标文件存在时，会询问是否覆盖" class="headerlink" title="实例二：目标文件存在时，会询问是否覆盖"></a>实例二：目标文件存在时，会询问是否覆盖</h3><p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp log.log test5</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# cp log.log test5</span><br><span class="line">cp：是否覆盖“test5&#x2F;log.log”? n</span><br><span class="line">[root@localhost test]# cp -a log.log test5</span><br><span class="line">cp：是否覆盖“test5&#x2F;log.log”? y</span><br><span class="line">[root@localhost test]# cd test5&#x2F;</span><br><span class="line">[root@localhost test5]# ll</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-1.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-2.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:46 log5-3.log</span><br><span class="line">-rw-r--r-- 1 root root 0 10-28 14:48 log.log</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<p>目标文件存在时，会询问是否覆盖。这是因为cp是cp -i的别名。目标文件存在时，即使加了-f标志，也还会询问是否覆盖。</p>
-<h3 id="实例三：复制整个目录"><a href="#实例三：复制整个目录" class="headerlink" title="实例三：复制整个目录"></a>实例三：复制整个目录</h3><p>命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -a test3 test5 </span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<p>目标目录存在时：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# cp -a test3 test5 </span><br><span class="line">[root@localhost test]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br><span class="line">drwxr-xr-x 6 root root 4096 10-27 01:58 scf</span><br><span class="line">drwxrwxrwx 2 root root 4096 10-28 14:47 test3</span><br><span class="line">drwxr-xr-x 3 root root 4096 10-28 15:11 test5</span><br><span class="line">[root@localhost test]# cd test5&#x2F;</span><br><span class="line">[root@localhost test5]# ll</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:46 log5-1.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:46 log5-2.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:46 log5-3.log</span><br><span class="line">-rw-r--r-- 1 root root    0 10-28 14:48 log.log</span><br><span class="line">drwxrwxrwx 2 root root 4096 10-28 14:47 test3</span><br><span class="line">&#96;&#96;</span><br><span class="line"></span><br><span class="line">目标目录不存在是：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>[root@localhost test]# cp -a test3 test4<br>[root@localhost test]# ll<br>-rw-r–r– 1 root root    0 10-28 14:48 log.log<br>drwxr-xr-x 6 root root 4096 10-27 01:58 scf<br>drwxrwxrwx 2 root root 4096 10-28 14:47 test3<br>drwxrwxrwx 2 root root 4096 10-28 14:47 test4<br>drwxr-xr-x 3 root root 4096 10-28 15:11 test5<br>[root@localhost test]#</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">说明：</span><br><span class="line"></span><br><span class="line">注意目标目录存在与否结果是不一样的。目标目录存在时，整个源目录被复制到目标目录里面。</span><br><span class="line"> </span><br><span class="line">### 实例四：复制的 log.log 建立一个连结档 log_link.log</span><br><span class="line"></span><br><span class="line">命令：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>cp -s log.log log_link.log</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">输出：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>[root@localhost test]# cp -s log.log log_link.log<br>[root@localhost test]# ll<br>lrwxrwxrwx 1 root root    7 10-28 15:18 log_link.log -&gt; log.log<br>-rw-r–r– 1 root root    0 10-28 14:48 log.log<br>drwxr-xr-x 6 root root 4096 10-27 01:58 scf<br>drwxrwxrwx 2 root root 4096 10-28 14:47 test3<br>drwxrwxrwx 2 root root 4096 10-28 14:47 test4<br>drwxr-xr-x 3 root root 4096 10-28 15:11 test5</p>
-<p>```</p>
-<p>说明：</p>
-<p>那个 log_link.log 是由 -s 的参数造成的，建立的是一个『快捷方式』，所以您会看到在文件的最右边，会显示这个文件是『连结』到哪里去的！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/12/php-fpm-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1248,6 +1011,188 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/06/mysql-lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/06/06/mysql-lock/" class="post-title-link" itemprop="url">mysql的锁表于解锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-06-06 11:47:23" itemprop="dateCreated datePublished" datetime="2016-06-06T11:47:23+08:00">2016-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>锁表</p>
+<p>将mysql的数据库锁表，仅仅允许读，以保证数据的一致性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush tables with read lock;   </span><br></pre></td></tr></table></figure>
+
+<p>解锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; unlock tables;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.izyue.com/2016/06/02/yii-validators-validator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="紫悦">
+      <meta itemprop="description" content="不进则退，退一步万丈悬崖！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紫悦博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/06/02/yii-validators-validator/" class="post-title-link" itemprop="url">Yii 内置过滤器集合(规则)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-06-02 10:34:51" itemprop="dateCreated datePublished" datetime="2016-06-02T10:34:51+08:00">2016-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-13 14:53:26" itemprop="dateModified" datetime="2020-10-13T14:53:26+08:00">2020-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/Yii/" itemprop="url" rel="index"><span itemprop="name">Yii</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>参照 <a target="_blank" rel="noopener" href="http://www.yiiframework.com/doc-2.0/yii-validators-validator.html#$builtInValidators-detail">http://www.yiiframework.com/doc-2.0/yii-validators-validator.html#$builtInValidators-detail</a></p>
+<p>验证器是所有验证程序的基类。</p>
+<p>子类应该覆盖validatevalue()和/或validateattribute()方法提供执行数据验证的实际逻辑。子类也可以覆盖clientvalidateattribute()提供客户端验证支持。<br>验证器是一套 [[builtInValidators|built-in validators] 可以参考使用短名称。它们被列为如下：</p>
+<ul>
+<li><code>boolean</code>: yii\validators\BooleanValidator</li>
+<li><code>captcha</code>: yii\captcha\CaptchaValidator</li>
+<li><code>compare</code>: yii\validators\CompareValidator</li>
+<li><code>date</code>: yii\validators\DateValidator</li>
+<li><code>default</code>: yii\validators\DefaultValueValidator</li>
+<li><code>double</code>: yii\validators\NumberValidator</li>
+<li><code>each</code>: yii\validators\EachValidator</li>
+<li><code>email</code>: yii\validators\EmailValidator</li>
+<li><code>exist</code>: yii\validators\ExistValidator</li>
+<li><code>file</code>: yii\validators\FileValidator</li>
+<li><code>filter</code>: yii\validators\FilterValidator</li>
+<li><code>image</code>: yii\validators\ImageValidator</li>
+<li><code>in</code>: yii\validators\RangeValidator</li>
+<li><code>integer</code>: yii\validators\NumberValidator</li>
+<li><code>match</code>: yii\validators\RegularExpressionValidator</li>
+<li><code>required</code>: yii\validators\RequiredValidator</li>
+<li><code>safe</code>: yii\validators\SafeValidator</li>
+<li><code>string</code>: yii\validators\StringValidator</li>
+<li><code>trim</code>: yii\validators\FilterValidator</li>
+<li><code>unique</code>: yii\validators\UniqueValidator</li>
+<li><code>url</code>: yii\validators\UrlValidator</li>
+<li><code>ip</code>: yii\validators\IpValidator</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1317,7 +1262,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
