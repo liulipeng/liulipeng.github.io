@@ -275,7 +275,7 @@
 <p>/usr/local/php/etc/php-fpm.conf重要优化参数详解：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm &#x3D; dynamic</span><br></pre></td></tr></table></figure>
 
-<p>pm参数指定了进程管理方式，有两种可供选择：<code>static </code>或<code>dynamic </code>，从字面意思不难理解，为静态或动态方式。如果是静态方式，那么在php-fpm启动的时候就创建了指定数目的进程，在运行过程中不会再有变化(并不是真的就永远不变)；而动态的则在运行过程中动态调整，当然并不是无限制的创建新进程，受pm.max_spare_servers参数影响；**<span style="color:red">动态适合小内存机器，灵活分配进程，省内存。静态适用于大内存机器，动态创建回收进程对服务器资源也是一种消耗<span>**</span></span></p>
+<p>pm参数指定了进程管理方式，有两种可供选择：<code>static </code>或<code>dynamic </code>，从字面意思不难理解，为静态或动态方式。如果是静态方式，那么在php-fpm启动的时候就创建了指定数目的进程，在运行过程中不会再有变化(并不是真的就永远不变)；而动态的则在运行过程中动态调整，当然并不是无限制的创建新进程，受pm.max_spare_servers参数影响；**<span style="color:red">动态适合小内存机器，灵活分配进程，省内存。静态适用于大内存机器，动态创建回收进程对服务器资源也是一种消耗<span>**</p>
 <ul>
 <li>static模式下创建的子进程数或dynamic模式下同一时刻允许最大的php-fpm子进程数量</li>
 </ul>
@@ -296,7 +296,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm.max_spare_servers &#x3D; 24</span><br></pre></td></tr></table></figure>
 
-<p><strong><span style="color:red"><br>一般php-fpm进程占用20~30m左右的内存就按30m算。如果单独跑php-fpm，动态方式起始值可设置物理内存Mem/30M，由于大家一般Nginx、MySQL都在一台机器上，于是预留一半给它们，即php-fpm进程数为$Mem/2/30。<span></span></span></strong></p>
+<p><strong><span style="color:red"><br>一般php-fpm进程占用20~30m左右的内存就按30m算。如果单独跑php-fpm，动态方式起始值可设置物理内存Mem/30M，由于大家一般Nginx、MySQL都在一台机器上，于是预留一半给它们，即php-fpm进程数为$Mem/2/30。<span></strong></p>
 <p>LNMP在一台机器上参数（仅供参考，建议压力测试得出）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mem&#x3D;&#96;free -m | awk &#39;&#x2F;Mem:&#x2F;&#123;print $2&#125;&#39;&#96; #我的机器内存是987M</span><br><span class="line">sed -i &quot;s@^pm.max_children.*@pm.max_children &#x3D; $(($Mem&#x2F;2&#x2F;20))@&quot; $php_install_dir&#x2F;etc&#x2F;php-fpm.conf</span><br><span class="line">sed -i &quot;s@^pm.start_servers.*@pm.start_servers &#x3D; $(($Mem&#x2F;2&#x2F;30))@&quot; $php_install_dir&#x2F;etc&#x2F;php-fpm.conf</span><br><span class="line">sed -i &quot;s@^pm.min_spare_servers.*@pm.min_spare_servers &#x3D; $(($Mem&#x2F;2&#x2F;40))@&quot; $php_install_dir&#x2F;etc&#x2F;php-fpm.conf</span><br><span class="line">sed -i &quot;s@^pm.max_spare_servers.*@pm.max_spare_servers &#x3D; $(($Mem&#x2F;2&#x2F;20))@&quot; $php_install_dir&#x2F;etc&#x2F;php-fpm.conf</span><br></pre></td></tr></table></figure>
 

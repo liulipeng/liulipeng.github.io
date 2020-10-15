@@ -259,7 +259,7 @@
       
         <h3 id="不重新编译PHP为php增加openssl模块的方法"><a href="#不重新编译PHP为php增加openssl模块的方法" class="headerlink" title="不重新编译PHP为php增加openssl模块的方法"></a>不重新编译PHP为php增加openssl模块的方法</h3><pre class="prettyprint lang-js linenums">yum -y install openssl</pre>
 
-<h3 id><a href="#" class="headerlink" title></a></h3><p>/usr/local/bin/是php的安装目录<br>切换到php安装目录的etx/openssl目录</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>/usr/local/bin/是php的安装目录<br>切换到php安装目录的etx/openssl目录</p>
 <pre class="prettyprint lang-js linenums">cd /usr/local/src/php-5.2.8/ext/openssl
 /usr/local/bin/phpize
 </pre>
@@ -269,11 +269,11 @@
 <p>执行：</p>
 <pre class="prettyprint lang-js linenums">/usr/local/bin/phpize</pre>
 
-<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><p>编译：</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>编译：</p>
 <pre class="prettyprint lang-js linenums">./configure --with-openssl --with-php-config=/usr/local/bin/php-config 
 make;make install</pre>
 
-<h3 id="-2"><a href="#-2" class="headerlink" title></a></h3><p>提示成功后，在php.ini里加入extension = openssl.so<br>重启apache或php-fpm，完成.</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><p>提示成功后，在php.ini里加入extension = openssl.so<br>重启apache或php-fpm，完成.</p>
 
     </div>
 
